@@ -1,43 +1,40 @@
-import '../styles/globals.css';
-import '@rainbow-me/rainbowkit/styles.css';
-import { getDefaultWallets, RainbowKitProvider } from '@rainbow-me/rainbowkit';
-import type { AppProps } from 'next/app';
-import { configureChains, createConfig, WagmiConfig } from 'wagmi';
-import { arbitrum, goerli, mainnet, optimism, polygon } from 'wagmi/chains';
-import { publicProvider } from 'wagmi/providers/public';
+import '../styles/globals.css'
+import '@rainbow-me/rainbowkit/styles.css'
+import { lightTheme, RainbowKitProvider } from '@rainbow-me/rainbowkit'
+import { configureChains, createConfig, WagmiConfig } from 'wagmi'
+import { jsonRpcProvider } from 'wagmi/providers/jsonRpc'
+import celoGroups from '@celo/rainbowkit-celo/lists'
+import { Alfajores, Celo, Cannoli } from '@celo/rainbowkit-celo/chains'
+import '@rainbow-me/rainbowkit/styles.css'
 
-const { chains, publicClient, webSocketPublicClient } = configureChains(
-  [
-    mainnet,
-    polygon,
-    optimism,
-    arbitrum,
-    ...(process.env.NEXT_PUBLIC_ENABLE_TESTNETS === 'true' ? [goerli] : []),
-  ],
-  [publicProvider()]
-);
+const projectId = 'your-wallet-connnect-project-id' // get one at https://cloud.walletconnect.com/app
 
-const { connectors } = getDefaultWallets({
-  appName: 'RainbowKit App',
-  projectId: 'YOUR_PROJECT_ID',
+const { chains, publicClient } = configureChains(
+  [Alfajores, Celo, Cannoli],
+  [jsonRpcProvider({ rpc: chain => ({ http: chain.rpcUrls.default.http[0] }) })]
+)
+const connectors = celoGroups({
   chains,
-});
-
+  projectId,
+  appName: (typeof document === 'object' && document.title) || 'Your App Name'
+})
 const wagmiConfig = createConfig({
   autoConnect: true,
   connectors,
-  publicClient,
-  webSocketPublicClient,
-});
+  publicClient: publicClient
+})
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp ({ Component, pageProps }: any) {
   return (
     <WagmiConfig config={wagmiConfig}>
-      <RainbowKitProvider chains={chains}>
+      <RainbowKitProvider theme={lightTheme({
+         accentColor: '#16A34A',
+
+      })} chains={chains}>
         <Component {...pageProps} />
       </RainbowKitProvider>
     </WagmiConfig>
-  );
+  )
 }
 
-export default MyApp;
+export default MyApp
