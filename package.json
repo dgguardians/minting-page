@@ -9,8 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@celo/rainbowkit-celo": "^1.0.0",
-    "@rainbow-me/rainbowkit": "^1.0.3",
+    "@celo/rainbowkit-celo": "^1.0.2",
+    "@rainbow-me/rainbowkit": "^1.0.4",
     "next": "^13.4.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
