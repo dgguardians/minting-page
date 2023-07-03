@@ -10,13 +10,13 @@ import { configureChains, createConfig, WagmiConfig } from 'wagmi'
 import { jsonRpcProvider } from 'wagmi/providers/jsonRpc'
 
 // Import known recommended wallets
-import { Valora, CeloWallet, CeloTerminal } from '@celo/rainbowkit-celo/wallets'
+import { Valora, CeloWallet } from '@celo/rainbowkit-celo/wallets'
 import {
   metaMaskWallet,
   walletConnectWallet,
   omniWallet,
   ledgerWallet,
-  coinbaseWallet,
+  coinbaseWallet
 } from '@rainbow-me/rainbowkit/wallets'
 
 // Import CELO chain information
@@ -39,11 +39,7 @@ const connectors = connectorsForWallets([
   {
     ...wallets,
     groupName: 'CELO Only',
-    wallets: [
-      Valora({ projectId, chains }),
-      CeloWallet({ projectId, chains }),
-      CeloTerminal({ projectId, chains })
-    ]
+    wallets: [Valora({ projectId, chains }), CeloWallet({ projectId, chains })]
   },
   {
     groupName: 'Supports Celo',
@@ -70,6 +66,7 @@ function MyApp ({ Component, pageProps }: any) {
           accentColor: '#16A34A'
         })}
         chains={chains}
+        coolMode
       >
         <Component {...pageProps} />
       </RainbowKitProvider>
