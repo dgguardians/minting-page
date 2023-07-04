@@ -1,4 +1,3 @@
-import { Names } from 'aws-cdk-lib'
 import Image from 'next/image'
 import React from 'react'
 
