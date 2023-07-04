@@ -21,44 +21,70 @@ import {
 
 // Import CELO chain information
 import { Alfajores, Celo } from '@celo/rainbowkit-celo/chains'
+import useDeviceType from '../hooks/useDevice'
 
 const projectId = '7e527e8d641d036dca61031d4bb8b5bc'
 
-const { chains, publicClient } = configureChains(
-  [Alfajores, Celo],
-  [jsonRpcProvider({ rpc: chain => ({ http: chain.rpcUrls.default.http[0] }) })]
-)
-
-const { wallets } = getDefaultWallets({
-  appName: 'My RainbowKit App',
-  projectId,
-  chains
-})
-
-const connectors = connectorsForWallets([
-  {
-    ...wallets,
-    groupName: 'CELO Only',
-    wallets: [Valora({ projectId, chains }), CeloWallet({ projectId, chains })]
-  },
-  {
-    groupName: 'Supports Celo',
-    wallets: [
-      metaMaskWallet({ projectId, chains }),
-      omniWallet({ projectId, chains }),
-      walletConnectWallet({ projectId, chains }),
-      ledgerWallet({ projectId, chains }),
-      coinbaseWallet({ appName: 'DGG Mint', chains })
-    ]
-  }
-])
-
-const wagmiConfig = createConfig({
-  autoConnect: true,
-  connectors,
-  publicClient: publicClient
-})
 function MyApp ({ Component, pageProps }: any) {
+  const isDesktop = useDeviceType()
+  const { chains, publicClient } = configureChains(
+    [Alfajores, Celo],
+    [
+      jsonRpcProvider({
+        rpc: chain => ({ http: chain.rpcUrls.default.http[0] })
+      })
+    ]
+  )
+
+  const { wallets } = getDefaultWallets({
+    appName: 'DGG Mint',
+    projectId,
+    chains
+  })
+
+  const connectors = isDesktop ? connectorsForWallets([
+    {
+      ...wallets,
+      groupName: 'CELO Only',
+      wallets: [
+        Valora({ projectId, chains }),
+        CeloWallet({ projectId, chains })
+      ]
+    },
+    {
+      groupName: 'Supports Celo',
+      wallets: [
+        metaMaskWallet({ projectId, chains }),
+        omniWallet({ projectId, chains }),
+        walletConnectWallet({ projectId, chains }),
+        ledgerWallet({ projectId, chains }),
+        coinbaseWallet({ appName: 'DGG Mint', chains })
+      ]
+    }
+  ]): connectorsForWallets([
+    {
+      ...wallets,
+      groupName: 'CELO Only',
+      wallets: [
+        Valora({ projectId, chains }),
+        CeloWallet({ projectId, chains })
+      ]
+    },
+    {
+      groupName: 'Supports Celo',
+      wallets: [
+        metaMaskWallet({ projectId, chains }),
+        walletConnectWallet({ projectId, chains }),
+      ]
+    }
+  ])
+
+  const wagmiConfig = createConfig({
+    autoConnect: true,
+    connectors,
+    publicClient: publicClient
+  })
+
   return (
     <WagmiConfig config={wagmiConfig}>
       <RainbowKitProvider
@@ -66,7 +92,6 @@ function MyApp ({ Component, pageProps }: any) {
           accentColor: '#16A34A'
         })}
         chains={chains}
-        coolMode
       >
         <Component {...pageProps} />
       </RainbowKitProvider>
