@@ -41,27 +41,19 @@ function MyApp ({ Component, pageProps }: any) {
     projectId,
     chains
   })
-
-  const connectors = isDesktop ? connectorsForWallets([
-    {
-      ...wallets,
-      groupName: 'CELO Only',
-      wallets: [
-        Valora({ projectId, chains }),
-        CeloWallet({ projectId, chains })
-      ]
-    },
-    {
-      groupName: 'Supports Celo',
-      wallets: [
+  const availabloWallets = isDesktop
+    ? [
         metaMaskWallet({ projectId, chains }),
         omniWallet({ projectId, chains }),
         walletConnectWallet({ projectId, chains }),
         ledgerWallet({ projectId, chains }),
         coinbaseWallet({ appName: 'DGG Mint', chains })
       ]
-    }
-  ]): connectorsForWallets([
+    : [
+        metaMaskWallet({ projectId, chains }),
+        walletConnectWallet({ projectId, chains })
+      ]
+  const connectors = connectorsForWallets([
     {
       ...wallets,
       groupName: 'CELO Only',
@@ -72,10 +64,7 @@ function MyApp ({ Component, pageProps }: any) {
     },
     {
       groupName: 'Supports Celo',
-      wallets: [
-        metaMaskWallet({ projectId, chains }),
-        walletConnectWallet({ projectId, chains }),
-      ]
+      wallets: [...availabloWallets]
     }
   ])
 
