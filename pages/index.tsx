@@ -4,7 +4,6 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import { useAccount, usePrepareContractWrite, useContractWrite } from 'wagmi'
 import contractAbi from '../contract.abi.json'
-import Image from 'next/image'
 import NFT_Air_Black from '../public/images/NFT_Air_Black.webp'
 import NFT_Air_White from '../public/images/NFT_Air_White.webp'
 import NFT_Air_Green from '../public/images/NFT_Air_Green.webp'
@@ -55,17 +54,32 @@ const Home: NextPage = () => {
             largeScreen: 'full'
           }}
         />
-        {/* {isConnected && (
-          <button onClick={()=> mint?.()} className='px-4 py-2 m-10 rounded-md bg-green-600 text-xl text-white font-bold'>
-            Mint
-          </button>
-        )} */}
         <div className='flex flex-wrap   flex-row w-full  justify-center items-center gap-4 m-10'>
-          <CardsContainer isConnected={isConnected} names={['Air', 'Air', 'Air']} images={[NFT_Air_Black, NFT_Air_Green, NFT_Air_White]} />
-          <CardsContainer isConnected={isConnected} names={['Earth', 'Earth', 'Earth']} images={[NFT_Earth_Black, NFT_Earth_Green, NFT_Earth_White]} />
-          <CardsContainer isConnected={isConnected} names={['Space', 'Space', 'Space']} images={[NFT_Space_Black, NFT_Space_Green, NFT_Space_White]} />
-          <CardsContainer isConnected={isConnected} names={['Fire', 'Fire', 'Fire']} images={[NFT_Fire_Black, NFT_Fire_Green, NFT_Fire_White]} />
-          <CardsContainer isConnected={isConnected} names={['Water', 'Water', 'Water']} images={[NFT_Water_Black, NFT_Water_Green, NFT_Water_White]} />
+          <CardsContainer
+            isConnected={isConnected}
+            names={['Air', 'Air', 'Air']}
+            images={[NFT_Air_Black, NFT_Air_White, NFT_Air_Green]}
+          />
+          <CardsContainer
+            isConnected={isConnected}
+            names={['Earth', 'Earth', 'Earth']}
+            images={[NFT_Earth_Black, NFT_Earth_White, NFT_Earth_Green]}
+          />
+          <CardsContainer
+            isConnected={isConnected}
+            names={['Space', 'Space', 'Space']}
+            images={[NFT_Space_Black, NFT_Space_White, NFT_Space_Green]}
+          />
+          <CardsContainer
+            isConnected={isConnected}
+            names={['Fire', 'Fire', 'Fire']}
+            images={[NFT_Fire_Black, NFT_Fire_White, NFT_Fire_Green]}
+          />
+          <CardsContainer
+            isConnected={isConnected}
+            names={['Water', 'Water', 'Water']}
+            images={[NFT_Water_Black, NFT_Water_White, NFT_Water_Green]}
+          />
         </div>
         {isSuccess && <p className='text-green-600 font-bold'>Minted!</p>}
       </main>

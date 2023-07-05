@@ -8,7 +8,9 @@ import {
 } from '@rainbow-me/rainbowkit'
 import { configureChains, createConfig, WagmiConfig } from 'wagmi'
 import { jsonRpcProvider } from 'wagmi/providers/jsonRpc'
+import { ToastContainer } from 'react-toastify'
 
+import 'react-toastify/dist/ReactToastify.css'
 // Import known recommended wallets
 import { Valora, CeloWallet } from '@celo/rainbowkit-celo/wallets'
 import {
@@ -82,6 +84,7 @@ function MyApp ({ Component, pageProps }: any) {
         })}
         chains={chains}
       >
+        <ToastContainer />
         <Component {...pageProps} />
       </RainbowKitProvider>
     </WagmiConfig>
