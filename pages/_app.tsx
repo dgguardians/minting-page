@@ -30,7 +30,7 @@ const projectId = '7e527e8d641d036dca61031d4bb8b5bc'
 function MyApp ({ Component, pageProps }: any) {
   const isDesktop = useDeviceType()
   const { chains, publicClient } = configureChains(
-    [Alfajores, Celo],
+    [Celo],
     [
       jsonRpcProvider({
         rpc: chain => ({ http: chain.rpcUrls.default.http[0] })
@@ -43,30 +43,32 @@ function MyApp ({ Component, pageProps }: any) {
     projectId,
     chains
   })
-  const availabloWallets = isDesktop
+
+  console.log(wallets)
+  const celoWallets = isDesktop
+    ? [Valora({ projectId, chains }), CeloWallet({ projectId, chains })]
+    : [Valora({ projectId, chains })]
+  const availableWallets = isDesktop
     ? [
         metaMaskWallet({ projectId, chains }),
         omniWallet({ projectId, chains }),
-        walletConnectWallet({ projectId, chains }),
+        walletConnectWallet({projectId, chains }),
         ledgerWallet({ projectId, chains }),
         coinbaseWallet({ appName: 'DGG Mint', chains })
       ]
     : [
-        metaMaskWallet({ projectId, chains }),
-        walletConnectWallet({ projectId, chains })
+        metaMaskWallet({ projectId, chains })
+        // walletConnectWallet({ projectId, chains })
       ]
   const connectors = connectorsForWallets([
+    // ...wallets,
     {
-      ...wallets,
       groupName: 'CELO Only',
-      wallets: [
-        Valora({ projectId, chains }),
-        CeloWallet({ projectId, chains })
-      ]
+      wallets: [...celoWallets]
     },
     {
       groupName: 'Supports Celo',
-      wallets: [...availabloWallets]
+      wallets: [...availableWallets]
     }
   ])
 

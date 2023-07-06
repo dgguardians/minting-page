@@ -57,18 +57,18 @@ const Home: NextPage = () => {
         <div className='flex flex-wrap   flex-row w-full  justify-center items-center gap-4 m-10'>
           <CardsContainer
             isConnected={isConnected}
-            names={['Air', 'Air', 'Air']}
-            images={[NFT_Air_Black, NFT_Air_White, NFT_Air_Green]}
-          />
-          <CardsContainer
-            isConnected={isConnected}
             names={['Earth', 'Earth', 'Earth']}
             images={[NFT_Earth_Black, NFT_Earth_White, NFT_Earth_Green]}
           />
           <CardsContainer
             isConnected={isConnected}
-            names={['Space', 'Space', 'Space']}
-            images={[NFT_Space_Black, NFT_Space_White, NFT_Space_Green]}
+            names={['Air', 'Air', 'Air']}
+            images={[NFT_Air_Black, NFT_Air_White, NFT_Air_Green]}
+          />
+          <CardsContainer
+            isConnected={isConnected}
+            names={['Water', 'Water', 'Water']}
+            images={[NFT_Water_Black, NFT_Water_White, NFT_Water_Green]}
           />
           <CardsContainer
             isConnected={isConnected}
@@ -77,8 +77,8 @@ const Home: NextPage = () => {
           />
           <CardsContainer
             isConnected={isConnected}
-            names={['Water', 'Water', 'Water']}
-            images={[NFT_Water_Black, NFT_Water_White, NFT_Water_Green]}
+            names={['Space', 'Space', 'Space']}
+            images={[NFT_Space_Black, NFT_Space_White, NFT_Space_Green]}
           />
         </div>
         {isSuccess && <p className='text-green-600 font-bold'>Minted!</p>}
