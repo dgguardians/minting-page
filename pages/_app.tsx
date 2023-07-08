@@ -84,6 +84,7 @@ function MyApp ({ Component, pageProps }: any) {
         theme={lightTheme({
           accentColor: '#16A34A'
         })}
+        coolMode
         chains={chains}
       >
         <ToastContainer />

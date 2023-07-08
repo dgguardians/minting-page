@@ -20,16 +20,25 @@ import NFT_Space_Green from '../public/images/NFT_Space_Green.webp'
 import NFT_Space_White from '../public/images/NFT_Space_White.webp'
 import NFT_Space_Black from '../public/images/NFT_Space_Black.webp'
 import { CardsContainer } from '../components/CardsContainer'
+import { useEffect, useState } from 'react'
+import { toast } from 'react-toastify'
 
 const Home: NextPage = () => {
   const { isConnected } = useAccount()
-
+  const [isConnectedToWallet, setIsConnectedToWallet] = useState(false)
   const { config } = usePrepareContractWrite({
     address: '0x510B5aF8f210296C561A6Ac6d03A49b5F6360a2f',
     abi: contractAbi,
     functionName: 'safeMint'
   })
   const { write: mint, isSuccess } = useContractWrite(config)
+
+  useEffect(() => {
+    if (!isConnectedToWallet) {
+      setIsConnectedToWallet(true)
+      toast.info('Now you can mint your NFT!')
+    }
+  }, [isConnected])
 
   return (
     <div className={`${styles.container} backdrop-blur-lg`}>
