@@ -58,27 +58,27 @@ const Home: NextPage = () => {
           <CardsContainer
             isConnected={isConnected}
             names={['Earth', 'Earth', 'Earth']}
-            images={[NFT_Earth_Black, NFT_Earth_White, NFT_Earth_Green]}
+            images={[NFT_Earth_Black, NFT_Earth_Green, NFT_Earth_White]}
           />
           <CardsContainer
             isConnected={isConnected}
             names={['Air', 'Air', 'Air']}
-            images={[NFT_Air_Black, NFT_Air_White, NFT_Air_Green]}
+            images={[NFT_Air_Black, NFT_Air_Green, NFT_Air_White]}
           />
           <CardsContainer
             isConnected={isConnected}
             names={['Water', 'Water', 'Water']}
-            images={[NFT_Water_Black, NFT_Water_White, NFT_Water_Green]}
+            images={[NFT_Water_Black, NFT_Water_Green, NFT_Water_White]}
           />
           <CardsContainer
             isConnected={isConnected}
             names={['Fire', 'Fire', 'Fire']}
-            images={[NFT_Fire_Black, NFT_Fire_White, NFT_Fire_Green]}
+            images={[NFT_Fire_Black, NFT_Fire_Green, NFT_Fire_White]}
           />
           <CardsContainer
             isConnected={isConnected}
             names={['Space', 'Space', 'Space']}
-            images={[NFT_Space_Black, NFT_Space_White, NFT_Space_Green]}
+            images={[NFT_Space_Black, NFT_Space_Green, NFT_Space_White]}
           />
         </div>
         {isSuccess && <p className='text-green-600 font-bold'>Minted!</p>}
