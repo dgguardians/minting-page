@@ -9,7 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@celo/contractkit": "^4.1.0",
     "@celo/rainbowkit-celo": "^1.0.2",
+    "@celo/react-celo": "^5.0.4",
     "@rainbow-me/rainbowkit": "1.0.5",
     "framer-motion": "^10.12.18",
     "next": "^13.4.3",

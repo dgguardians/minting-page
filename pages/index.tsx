@@ -22,23 +22,28 @@ import NFT_Space_Black from '../public/images/NFT_Space_Black.webp'
 import { CardsContainer } from '../components/CardsContainer'
 import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
+import { useCelo } from '@celo/react-celo'
+import useDeviceType from '../hooks/useDevice'
 
 const Home: NextPage = () => {
+  const isDesktop = useDeviceType()
+  
   const { isConnected } = useAccount()
-  const [isConnectedToWallet, setIsConnectedToWallet] = useState(false)
+  // const [isConnectedToCeloWallet, setIsConnectedToCeloWallet] = useState(false)
   const { config } = usePrepareContractWrite({
     address: '0x510B5aF8f210296C561A6Ac6d03A49b5F6360a2f',
     abi: contractAbi,
     functionName: 'safeMint'
   })
   const { write: mint, isSuccess } = useContractWrite(config)
+  const { connect, disconnect, address } = useCelo()
 
-  useEffect(() => {
-    if (!isConnectedToWallet) {
-      setIsConnectedToWallet(true)
-      toast.info('Now you can mint your NFT!')
-    }
-  }, [isConnected])
+  // useEffect(() => {
+  //   if (!isConnectedToCeloWallet) {
+  //     setIsConnectedToCeloWallet(true)
+  //     toast.info('Now you can mint your NFT!', { toastId: 'customId' })
+  //   }
+  // }, [address])
 
   return (
     <div className={`${styles.container} backdrop-blur-lg`}>
@@ -57,35 +62,53 @@ const Home: NextPage = () => {
           <span className='text-green-600 font-bold'> DG Guardians </span>
         </h1>
         <p className={styles.description}>Click to get a fabolous NFT!</p>
-        <ConnectButton
-          accountStatus={{
-            smallScreen: 'avatar',
-            largeScreen: 'full'
-          }}
-        />
+        {!address && (
+          <ConnectButton
+            accountStatus={{
+              smallScreen: 'avatar',
+              largeScreen: 'full'
+            }}
+          />
+        )}
+        {!isConnected && isDesktop &&
+          (address ? (
+            <>
+              <h1 className='p-5 text-blue-700 hover:text-blue-800'>
+                You are connected now!
+              </h1>
+              <button className='rounded-md font-bold px-4 py-2 bg-green-500 text-white' onClick={disconnect}>Disconnect</button>
+            </>
+          ) : (
+            <button
+              className='p-5 text-blue-700 hover:text-blue-800'
+              onClick={connect}
+            >
+              Or connect with native celo wallets like CEW
+            </button>
+          ))}
         <div className='flex flex-wrap   flex-row w-full  justify-center items-center gap-4 m-10'>
           <CardsContainer
-            isConnected={isConnected}
+            isConnected
             names={['Earth', 'Earth', 'Earth']}
             images={[NFT_Earth_Black, NFT_Earth_Green, NFT_Earth_White]}
           />
           <CardsContainer
-            isConnected={isConnected}
+            isConnected
             names={['Air', 'Air', 'Air']}
             images={[NFT_Air_Black, NFT_Air_Green, NFT_Air_White]}
           />
           <CardsContainer
-            isConnected={isConnected}
+            isConnected
             names={['Water', 'Water', 'Water']}
             images={[NFT_Water_Black, NFT_Water_Green, NFT_Water_White]}
           />
           <CardsContainer
-            isConnected={isConnected}
+            isConnected
             names={['Fire', 'Fire', 'Fire']}
             images={[NFT_Fire_Black, NFT_Fire_Green, NFT_Fire_White]}
           />
           <CardsContainer
-            isConnected={isConnected}
+            isConnected
             names={['Space', 'Space', 'Space']}
             images={[NFT_Space_Black, NFT_Space_Green, NFT_Space_White]}
           />
