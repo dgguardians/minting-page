@@ -19,6 +19,9 @@ import NFT_Water_Green from '../public/images/NFT_Water_Green.webp'
 import NFT_Space_Green from '../public/images/NFT_Space_Green.webp'
 import NFT_Space_White from '../public/images/NFT_Space_White.webp'
 import NFT_Space_Black from '../public/images/NFT_Space_Black.webp'
+import NFT_Metal_Green from '../public/images/NFT_Metal_Green.webp'
+import NFT_Metal_White from '../public/images/NFT_Metal_White.webp'
+import NFT_Metal_Black from '../public/images/NFT_Metal_Black.webp'
 import { CardsContainer } from '../components/CardsContainer'
 import { useCelo } from '@celo/react-celo'
 import useDeviceType from '../hooks/useDevice'
@@ -123,6 +126,11 @@ const Home: NextPage = () => {
             isConnected
             names={['Space', 'Space', 'Space']}
             images={[NFT_Space_Black, NFT_Space_Green, NFT_Space_White]}
+          />
+          <CardsContainer
+            isConnected
+            names={['Metal', 'Metal', 'Metal']}
+            images={[NFT_Metal_Black, NFT_Metal_Green, NFT_Metal_White]}
           />
         </div>
       </main>
