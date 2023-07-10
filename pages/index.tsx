@@ -20,14 +20,12 @@ import NFT_Space_Green from '../public/images/NFT_Space_Green.webp'
 import NFT_Space_White from '../public/images/NFT_Space_White.webp'
 import NFT_Space_Black from '../public/images/NFT_Space_Black.webp'
 import { CardsContainer } from '../components/CardsContainer'
-import { useEffect, useState } from 'react'
-import { toast } from 'react-toastify'
 import { useCelo } from '@celo/react-celo'
 import useDeviceType from '../hooks/useDevice'
 
 const Home: NextPage = () => {
   const isDesktop = useDeviceType()
-  
+
   const { isConnected } = useAccount()
   // const [isConnectedToCeloWallet, setIsConnectedToCeloWallet] = useState(false)
   const { config } = usePrepareContractWrite({
@@ -59,33 +57,47 @@ const Home: NextPage = () => {
       <main className={styles.main}>
         <h1 className={styles.title}>
           Welcome to{' '}
-          <span className='text-green-600 font-bold'> DG Guardians </span>
+          <span className='text-green-600 font-bold'>
+            {' '}
+            Green digital guardians
+          </span>
         </h1>
-        <p className={styles.description}>Click to get a fabolous NFT!</p>
-        {!address && (
-          <ConnectButton
-            accountStatus={{
-              smallScreen: 'avatar',
-              largeScreen: 'full'
-            }}
-          />
-        )}
-        {!isConnected && isDesktop &&
-          (address ? (
-            <>
-              <h1 className='p-5 text-blue-700 hover:text-blue-800'>
-                You are connected now!
-              </h1>
-              <button className='rounded-md font-bold px-4 py-2 bg-green-500 text-white' onClick={disconnect}>Disconnect</button>
-            </>
-          ) : (
-            <button
-              className='p-5 text-blue-700 hover:text-blue-800'
-              onClick={connect}
-            >
-              Or connect with native celo wallets like CEW
-            </button>
-          ))}
+        <p className={styles.description}>This collection is cooming soon!</p>
+        {/* <p className={styles.description}>Click to get a fabolous NFT!</p> */}
+        <div className='flex flex-col md:flex-row gap-2'>
+          {!address && (
+            <ConnectButton
+              //@ts-expect-error
+              className='w-full'
+              label={'Connect Web3 Wallet'}
+              accountStatus={{
+                smallScreen: 'full',
+                largeScreen: 'full'
+              }}
+            />
+          )}
+          {!isConnected &&
+            (address ? (
+              <>
+                <h1 className='p-5 text-blue-700 hover:text-blue-800'>
+                  You are connected now!
+                </h1>
+                <button
+                  className='rounded-md font-bold px-4 py-2 bg-green-500 text-white'
+                  onClick={disconnect}
+                >
+                  Disconnect
+                </button>
+              </>
+            ) : (
+              <button
+                className='rounded-xl shadow-lg font-bold px-4 py-2 bg-green-600 text-white hover:transform hover:scale-105 transition duration-100 ease-in-out  '
+                onClick={connect}
+              >
+                Connect Celo Wallet
+              </button>
+            ))}
+        </div>
         <div className='flex flex-wrap   flex-row w-full  justify-center items-center gap-4 m-10'>
           <CardsContainer
             isConnected
@@ -113,12 +125,11 @@ const Home: NextPage = () => {
             images={[NFT_Space_Black, NFT_Space_Green, NFT_Space_White]}
           />
         </div>
-        {isSuccess && <p className='text-green-600 font-bold'>Minted!</p>}
       </main>
 
       <footer className={styles.footer}>
         <a href='https://dgguardians.com/' rel='DG Guardians' target='_blank'>
-          Made with 💚 by DG Guardians Team 🌱
+          Made with 💚 by Green digital guardians Team 🌱
         </a>
       </footer>
     </div>

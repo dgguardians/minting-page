@@ -18,7 +18,8 @@ import {
   metaMaskWallet,
   omniWallet,
   ledgerWallet,
-  coinbaseWallet
+  coinbaseWallet,
+  walletConnectWallet
 } from '@rainbow-me/rainbowkit/wallets'
 
 // Import CELO chain information
@@ -45,27 +46,21 @@ function MyApp ({ Component, pageProps }: any) {
     chains
   })
 
-  console.log(wallets)
-  const celoWallets = isDesktop
-    ? [Valora({ projectId, chains }), CeloWallet({ projectId, chains })]
-    : [Valora({ projectId, chains })]
   const availableWallets = isDesktop
     ? [
+        Valora({ projectId, chains }),
         metaMaskWallet({ projectId, chains }),
         omniWallet({ projectId, chains }),
         ledgerWallet({ projectId, chains }),
-        coinbaseWallet({ appName: 'DGG Mint', chains })
+        coinbaseWallet({ appName: 'DGG Mint', chains }),
+        walletConnectWallet({ projectId, chains })
       ]
     : [
-        metaMaskWallet({ projectId, chains })
-        // walletConnectWallet({ projectId, chains })
+        Valora({ projectId, chains }),
+        metaMaskWallet({ projectId, chains }),
+        walletConnectWallet({ projectId, chains })
       ]
   const connectors = connectorsForWallets([
-    // ...wallets,
-    {
-      groupName: 'CELO Only',
-      wallets: [...celoWallets]
-    },
     {
       groupName: 'Supports Celo',
       wallets: [...availableWallets]
@@ -111,10 +106,8 @@ function MyApp ({ Component, pageProps }: any) {
                 SupportedProviders.CeloDance,
                 SupportedProviders.CoinbaseWallet,
                 SupportedProviders.Injected,
-                SupportedProviders.CeloWallet
-
-
-
+                SupportedProviders.WalletConnect,
+                SupportedProviders.CeloTerminal
               ],
               searchable: false
             }
