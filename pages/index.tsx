@@ -116,15 +116,15 @@ const Home: NextPage = () => {
             names={['Fire', 'Fire', 'Fire']}
             images={[NFT_Fire_Black, NFT_Fire_Green, NFT_Fire_White]}
           />
+                 <CardsContainer
+            isConnected
+            names={['Metal', 'Metal', 'Metal']}
+            images={[NFT_Metal_Black, NFT_Metal_Green, NFT_Metal_White]}
+          />
           <CardsContainer
             isConnected
             names={['Space', 'Space', 'Space']}
             images={[NFT_Space_Black, NFT_Space_Green, NFT_Space_White]}
-          />
-          <CardsContainer
-            isConnected
-            names={['Metal', 'Metal', 'Metal']}
-            images={[NFT_Metal_Black, NFT_Metal_Green, NFT_Metal_White]}
           />
         </div>
       </main>
