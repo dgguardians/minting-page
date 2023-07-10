@@ -30,7 +30,6 @@ const Home: NextPage = () => {
   const isDesktop = useDeviceType()
 
   const { isConnected } = useAccount()
-  // const [isConnectedToCeloWallet, setIsConnectedToCeloWallet] = useState(false)
   const { config } = usePrepareContractWrite({
     address: '0x510B5aF8f210296C561A6Ac6d03A49b5F6360a2f',
     abi: contractAbi,
@@ -39,12 +38,7 @@ const Home: NextPage = () => {
   const { write: mint, isSuccess } = useContractWrite(config)
   const { connect, disconnect, address } = useCelo()
 
-  // useEffect(() => {
-  //   if (!isConnectedToCeloWallet) {
-  //     setIsConnectedToCeloWallet(true)
-  //     toast.info('Now you can mint your NFT!', { toastId: 'customId' })
-  //   }
-  // }, [address])
+
 
   return (
     <div className={`${styles.container} backdrop-blur-lg`}>
@@ -62,7 +56,7 @@ const Home: NextPage = () => {
           Welcome to{' '}
           <span className='text-green-600 font-bold'>
             {' '}
-            Green digital guardians
+            Green Digital Guardians
           </span>
         </h1>
         <p className={styles.description}>This collection is cooming soon!</p>
@@ -79,7 +73,7 @@ const Home: NextPage = () => {
               }}
             />
           )}
-          {!isConnected &&
+          {isDesktop && !isConnected &&
             (address ? (
               <>
                 <h1 className='p-5 text-blue-700 hover:text-blue-800'>
