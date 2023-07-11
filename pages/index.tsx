@@ -25,10 +25,16 @@ import NFT_Metal_Black from '../public/images/NFT_Metal_Black.webp'
 import { CardsContainer } from '../components/CardsContainer'
 import { useCelo } from '@celo/react-celo'
 import useDeviceType from '../hooks/useDevice'
-
+import ButtonContainer from '../components/ButtonContainer'
+import { useEffect, useState } from 'react'
+import Modal from '../components/Modal'
+import { AnimatePresence } from 'framer-motion'
+import { convertWeb3Address } from '../functions/formatAddress'
+import { FiLogOut } from 'react-icons/fi'
+import { IoClose } from 'react-icons/io5'
 const Home: NextPage = () => {
   const isDesktop = useDeviceType()
-
+  const [openModal, setopenModal] = useState(false)
   const { isConnected } = useAccount()
   const { config } = usePrepareContractWrite({
     address: '0x510B5aF8f210296C561A6Ac6d03A49b5F6360a2f',
@@ -38,19 +44,40 @@ const Home: NextPage = () => {
   const { write: mint, isSuccess } = useContractWrite(config)
   const { connect, disconnect, address } = useCelo()
 
-
+  const handleOnDisconnect = () => {
+    disconnect()
+    setopenModal(false)
+  }
 
   return (
-    <div className={`${styles.container} backdrop-blur-lg`}>
-      <Head>
-        <title>DG Guardians mint</title>
-        <meta
-          content='DG Guardians mint'
-          name='This is a DAPP for minting DG Guardians NFTS.'
-        />
-        <link href='/favicon.ico' rel='icon' />
-      </Head>
-
+    <section className={`${styles.container} backdrop-blur-lg h-full`}>
+      {openModal && (
+        <Modal>
+          <div
+            className='absolute top-2 right-2 text-lg font-bold text-slate-900 cursor-pointer'
+            onClick={() => setopenModal(false)}
+          >
+            <IoClose />
+          </div>
+          <div
+            suppressHydrationWarning
+            className=' flex justify-center items-center bg-blue-300 rounded-full '
+          >
+            <p className='p-2 flex justify-center items-center pb-4 text-4xl'>
+              🐒
+            </p>
+          </div>
+          {/* {convertWeb3Address(address as string)} */}
+          <h1 className='text-black font-bold text-lg'>0X8SDS...34D</h1>
+          <button
+            className='text-slate-900 bg-white px-6 font-bold flex flex-col gap-2 justify-center items-center shadow-md rounded-lg p-2'
+            onClick={handleOnDisconnect}
+          >
+            <FiLogOut />
+            <p>Disconnect</p>
+          </button>
+        </Modal>
+      )}
       <main className={styles.main}>
         <h1 className={styles.title}>
           Welcome to{' '}
@@ -60,41 +87,15 @@ const Home: NextPage = () => {
           </span>
         </h1>
         <p className={styles.description}>This collection is cooming soon!</p>
+        <ButtonContainer
+          connect={connect}
+          disconnect={disconnect}
+          address={address}
+          isConnected={isConnected}
+          isDesktop={isDesktop}
+          setopenModal={setopenModal}
+        />
         {/* <p className={styles.description}>Click to get a fabolous NFT!</p> */}
-        <div className='flex flex-col md:flex-row gap-2'>
-          {!address && (
-            <ConnectButton
-              //@ts-expect-error
-              className='w-full'
-              label={'Connect Web3 Wallet'}
-              accountStatus={{
-                smallScreen: 'full',
-                largeScreen: 'full'
-              }}
-            />
-          )}
-          {isDesktop && !isConnected &&
-            (address ? (
-              <>
-                <h1 className='p-5 text-blue-700 hover:text-blue-800'>
-                  You are connected now!
-                </h1>
-                <button
-                  className='rounded-md font-bold px-4 py-2 bg-green-500 text-white'
-                  onClick={disconnect}
-                >
-                  Disconnect
-                </button>
-              </>
-            ) : (
-              <button
-                className='rounded-xl shadow-lg font-bold px-4 py-2 bg-green-600 text-white hover:transform hover:scale-105 transition duration-100 ease-in-out  '
-                onClick={connect}
-              >
-                Connect Celo Wallet
-              </button>
-            ))}
-        </div>
         <div className='flex flex-wrap   flex-row w-full  justify-center items-center gap-4 m-10'>
           <CardsContainer
             isConnected
@@ -116,7 +117,7 @@ const Home: NextPage = () => {
             names={['Fire', 'Fire', 'Fire']}
             images={[NFT_Fire_Black, NFT_Fire_Green, NFT_Fire_White]}
           />
-                 <CardsContainer
+          <CardsContainer
             isConnected
             names={['Metal', 'Metal', 'Metal']}
             images={[NFT_Metal_Black, NFT_Metal_Green, NFT_Metal_White]}
@@ -128,13 +129,12 @@ const Home: NextPage = () => {
           />
         </div>
       </main>
-
       <footer className={styles.footer}>
         <a href='https://dgguardians.com/' rel='DG Guardians' target='_blank'>
-          Made with 💚 by Green digital guardians Team 🌱
+          Made with 💚 by Green Digital Guardians Team 🌱
         </a>
       </footer>
-    </div>
+    </section>
   )
 }
 
