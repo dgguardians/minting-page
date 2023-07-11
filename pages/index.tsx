@@ -67,8 +67,9 @@ const Home: NextPage = () => {
               🐒
             </p>
           </div>
-          {/* {convertWeb3Address(address as string)} */}
-          <h1 className='text-black font-bold text-lg'>0X8SDS...34D</h1>
+          <h1 className='text-black font-bold text-lg'>
+            {convertWeb3Address(address as string)}
+          </h1>
           <button
             className='text-slate-900 bg-white px-6 font-bold flex flex-col gap-2 justify-center items-center shadow-md rounded-lg p-2'
             onClick={handleOnDisconnect}
