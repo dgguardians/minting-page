@@ -52,32 +52,34 @@ const Home: NextPage = () => {
   return (
     <section className={`${styles.container} backdrop-blur-lg h-full`}>
       {openModal && (
-        <Modal>
-          <div
-            className='absolute top-2 right-2 text-lg font-bold text-slate-900 cursor-pointer'
-            onClick={() => setopenModal(false)}
-          >
-            <IoClose />
-          </div>
-          <div
-            suppressHydrationWarning
-            className=' flex justify-center items-center bg-blue-300 rounded-full '
-          >
-            <p className='p-2 flex justify-center items-center pb-4 text-4xl'>
-              🐒
-            </p>
-          </div>
-          <h1 className='text-black font-bold text-lg'>
-            {convertWeb3Address(address as string)}
-          </h1>
-          <button
-            className='text-slate-900 bg-white px-6 font-bold flex flex-col gap-2 justify-center items-center shadow-md rounded-lg p-2'
-            onClick={handleOnDisconnect}
-          >
-            <FiLogOut />
-            <p>Disconnect</p>
-          </button>
-        </Modal>
+        <AnimatePresence>
+          <Modal>
+            <div
+              className='absolute top-2 right-2 text-lg font-bold text-slate-900 cursor-pointer'
+              onClick={() => setopenModal(false)}
+            >
+              <IoClose />
+            </div>
+            <div
+              suppressHydrationWarning
+              className=' flex justify-center items-center bg-blue-300 rounded-full '
+            >
+              <p className='p-2 flex justify-center items-center pb-4 text-4xl'>
+                🐒
+              </p>
+            </div>
+            <h1 className='text-black font-bold text-lg'>
+              {convertWeb3Address(address as string)}
+            </h1>
+            <button
+              className='text-slate-900 bg-white px-6 font-bold flex flex-col gap-2 justify-center items-center shadow-md rounded-lg p-2'
+              onClick={handleOnDisconnect}
+            >
+              <FiLogOut />
+              <p>Disconnect</p>
+            </button>
+          </Modal>
+        </AnimatePresence>
       )}
       <main className={styles.main}>
         <h1 className={styles.title}>
