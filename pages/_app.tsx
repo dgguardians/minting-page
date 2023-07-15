@@ -13,7 +13,7 @@ import { ToastContainer } from 'react-toastify'
 import '@celo/react-celo/lib/styles.css'
 import 'react-toastify/dist/ReactToastify.css'
 // Import known recommended wallets
-import { Valora, CeloWallet } from '@celo/rainbowkit-celo/wallets'
+import { Valora } from '@celo/rainbowkit-celo/wallets'
 import {
   metaMaskWallet,
   omniWallet,
@@ -23,7 +23,7 @@ import {
 } from '@rainbow-me/rainbowkit/wallets'
 
 // Import CELO chain information
-import { Alfajores, Celo } from '@celo/rainbowkit-celo/chains'
+import { celo, celoAlfajores } from 'viem/chains'
 import useDeviceType from '../hooks/useDevice'
 import { CeloProvider, SupportedProviders } from '@celo/react-celo'
 
@@ -32,7 +32,7 @@ const projectId = '7e527e8d641d036dca61031d4bb8b5bc'
 function MyApp ({ Component, pageProps }: any) {
   const isDesktop = useDeviceType()
   const { chains, publicClient } = configureChains(
-    [Celo],
+    [celo, celoAlfajores],
     [
       jsonRpcProvider({
         rpc: chain => ({ http: chain.rpcUrls.default.http[0] })
@@ -53,14 +53,13 @@ function MyApp ({ Component, pageProps }: any) {
         omniWallet({ projectId, chains }),
         ledgerWallet({ projectId, chains }),
         coinbaseWallet({ appName: 'DGG Mint', chains }),
-        walletConnectWallet({ projectId, chains })
       ]
     : [
         Valora({ projectId, chains }),
         metaMaskWallet({ projectId, chains }),
-        walletConnectWallet({ projectId, chains })
       ]
   const connectors = connectorsForWallets([
+    ...wallets,
     {
       groupName: 'Supports Celo',
       wallets: [...availableWallets]

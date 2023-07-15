@@ -22,6 +22,9 @@
     align-items: center;
     color: white;
   }
+  .bgmain{
+    background-image:url('../public/images/BG.jpeg'); 
+  }
 }
 
 html,

@@ -50,7 +50,7 @@ const Home: NextPage = () => {
   }
 
   return (
-    <section className={`${styles.container} backdrop-blur-lg h-full`}>
+    <section className={`${styles.container} bgmain  h-full`}>
       {openModal && (
         <AnimatePresence>
           <Modal>
