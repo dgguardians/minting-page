@@ -23,7 +23,8 @@
     color: white;
   }
   .bgmain{
-    background-image:url('../public/images/BG.jpeg'); 
+    background-image:url('../public/images/BG.jpeg');
+    background-repeat: round;
   }
 }
 

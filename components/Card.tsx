@@ -1,21 +1,17 @@
 import Image from 'next/image'
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { toast } from 'react-toastify'
+import useMint from '../hooks/useMint'
+import { parseEther } from 'viem'
 
-export default function Card ({ image, name, isConnected, type, pricing }: any) {
+export default function Card ({ image, name, isConnected, type, id, pricing }: any) {
+  const { mint, setid, setPrice } = useMint()
+
   const handleOnClick = () => {
-    toast('🪴 There is not available yet...', {
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: 'light',
-      toastId: "customId",
-      draggablePercent: 60
-    })
+    setid(id)
+    setPrice(pricing)
+    mint?.()
   }
   return (
     <div className='relative w-auto  backdrop-blur-md rounded-md  shadow-lg p-5'>
