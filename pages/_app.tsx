@@ -76,7 +76,7 @@ function MyApp ({ Component, pageProps }: any) {
     <WagmiConfig config={wagmiConfig}>
       <RainbowKitProvider
         theme={lightTheme({
-          accentColor: '#16A34A'
+          accentColor: '#4C8030'
         })}
         coolMode
         chains={chains}

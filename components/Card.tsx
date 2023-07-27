@@ -55,13 +55,13 @@ export default function Card ({ image, name, isConnected, type, id, pricing }: a
         {isConnected ? (
           <button
             onClick={handleOnClick}
-            className='bg-green-500 w-full text-white py-2 rounded-md'
+            className='bg-[#4C8030] font-bold w-full text-white py-2 rounded-md'
           >
             Mint!
           </button>
         ) : (
           <span>
-            <h2 className='bg-green-500 w-full text-white py-2 px-2 rounded-md'>
+            <h2 className='bg-[#4C8030] font-bold w-full text-white py-2 px-2 rounded-md'>
               Connect your wallet to get a NFT
             </h2>
           </span>

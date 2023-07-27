@@ -42,7 +42,7 @@ function ButtonContainer ({
           </div>
         ) : (
           <button
-            className='rounded-xl shadow-lg font-bold px-4 py-2 bg-green-600 text-white hover:transform   '
+            className='rounded-xl shadow-lg font-bold px-4 py-2 bg-[#4C8030] text-white hover:transform   '
             onClick={connect}
           >
             Connect Celo Wallet

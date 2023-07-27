@@ -17,9 +17,9 @@ import NFT_Water_White from '../public/images/Water-Copper.webp'
 import NFT_Space_Green from '../public/images/Space-Silver.webp'
 import NFT_Space_White from '../public/images/Space-Copper.webp'
 import NFT_Space_Black from '../public/images/Space-Gold.webp'
-// import NFT_Metal_Green from '../public/images/Metal-Copper.webp'
-// import NFT_Metal_White from '../public/images/NFT_Metal_White.webp'
-// import NFT_Metal_Black from '../public/images/NFT_Metal_Black.webp'
+import NFT_Metal_Green from '../public/images/Metal-Copper.webp'
+import NFT_Metal_White from '../public/images/Metal-Silver.webp'
+import NFT_Metal_Black from '../public/images/Metal-Gold.webp'
 import { CardsContainer } from '../components/CardsContainer'
 import { useCelo } from '@celo/react-celo'
 import useDeviceType from '../hooks/useDevice'
@@ -78,7 +78,7 @@ const Home: NextPage = () => {
       <main className={styles.main}>
         <h1 className={styles.title}>
           Welcome to{' '}
-          <span className='text-green-600 font-bold'>
+          <span className='text-[#4C8030] font-bold'>
             {' '}
             Green Digital Guardians
           </span>
@@ -119,12 +119,12 @@ const Home: NextPage = () => {
             names={['Fire', 'Fire', 'Fire']}
             images={[NFT_Fire_Black, NFT_Fire_Green, NFT_Fire_White]}
           />
-          {/* <CardsContainer
+          <CardsContainer
             isConnected
             ids={[5, 11, 17]}
             names={['Metal', 'Metal', 'Metal']}
             images={[NFT_Metal_Black, NFT_Metal_Green, NFT_Metal_White]}
-          /> */}
+          />
           <CardsContainer
             isConnected
             ids={[6, 12, 18]}
