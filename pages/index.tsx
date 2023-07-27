@@ -2,24 +2,24 @@ import { ConnectButton } from '@rainbow-me/rainbowkit'
 import type { NextPage } from 'next'
 import styles from '../styles/Home.module.css'
 import { useAccount, usePrepareContractWrite, useContractWrite } from 'wagmi'
-import NFT_Air_Black from '../public/images/NFT_Air_Black.webp'
-import NFT_Air_White from '../public/images/NFT_Air_White.webp'
-import NFT_Air_Green from '../public/images/NFT_Air_Green.webp'
-import NFT_Earth_Black from '../public/images/NFT_Earth_Black.webp'
-import NFT_Earth_White from '../public/images/NFT_Earth_White.webp'
-import NFT_Earth_Green from '../public/images/NFT_Earth_Green.webp'
-import NFT_Fire_Black from '../public/images/NFT_Fire_Black.webp'
-import NFT_Fire_White from '../public/images/NFT_Fire_White.webp'
-import NFT_Fire_Green from '../public/images/NFT_Fire_Green.webp'
-import NFT_Water_Black from '../public/images/NFT_Water_Black.webp'
-import NFT_Water_White from '../public/images/NFT_Water_White.webp'
-import NFT_Water_Green from '../public/images/NFT_Water_Green.webp'
-import NFT_Space_Green from '../public/images/NFT_Space_Green.webp'
-import NFT_Space_White from '../public/images/NFT_Space_White.webp'
-import NFT_Space_Black from '../public/images/NFT_Space_Black.webp'
-import NFT_Metal_Green from '../public/images/NFT_Metal_Green.webp'
-import NFT_Metal_White from '../public/images/NFT_Metal_White.webp'
-import NFT_Metal_Black from '../public/images/NFT_Metal_Black.webp'
+import NFT_Air_Black from '../public/images/Air-Gold.webp'
+import NFT_Air_Green from '../public/images/Air-Silver.webp'
+import NFT_Air_White from '../public/images/Air-Copper.webp'
+import NFT_Earth_Black from '../public/images/Earth-Gold.webp'
+import NFT_Earth_Green from '../public/images/Earth-Silver.webp'
+import NFT_Earth_White from '../public/images/Earth-Copper.webp'
+import NFT_Fire_Black from '../public/images/Fire-Gold.webp'
+import NFT_Fire_Green from '../public/images/Fire-Silver.webp'
+import NFT_Fire_White from '../public/images/Fire-Copper.webp'
+import NFT_Water_Black from '../public/images/Water-Gold.webp'
+import NFT_Water_Green from '../public/images/Water-Silver.webp'
+import NFT_Water_White from '../public/images/Water-Copper.webp'
+import NFT_Space_Green from '../public/images/Space-Silver.webp'
+import NFT_Space_White from '../public/images/Space-Copper.webp'
+import NFT_Space_Black from '../public/images/Space-Gold.webp'
+// import NFT_Metal_Green from '../public/images/Metal-Copper.webp'
+// import NFT_Metal_White from '../public/images/NFT_Metal_White.webp'
+// import NFT_Metal_Black from '../public/images/NFT_Metal_Black.webp'
 import { CardsContainer } from '../components/CardsContainer'
 import { useCelo } from '@celo/react-celo'
 import useDeviceType from '../hooks/useDevice'
@@ -96,6 +96,12 @@ const Home: NextPage = () => {
         <div className='flex flex-wrap   flex-row w-full  justify-center items-center gap-4 m-10'>
           <CardsContainer
             isConnected
+            ids={[3, 9, 15]}
+            names={['Water', 'Water', 'Water']}
+            images={[NFT_Water_Black, NFT_Water_Green, NFT_Water_White]}
+          />
+          <CardsContainer
+            isConnected
             ids={[1, 7, 13]}
             names={['Earth', 'Earth', 'Earth']}
             images={[NFT_Earth_Black, NFT_Earth_Green, NFT_Earth_White]}
@@ -106,24 +112,19 @@ const Home: NextPage = () => {
             names={['Air', 'Air', 'Air']}
             images={[NFT_Air_Black, NFT_Air_Green, NFT_Air_White]}
           />
-          <CardsContainer
-            isConnected
-            ids={[3, 9, 15]}
-            names={['Water', 'Water', 'Water']}
-            images={[NFT_Water_Black, NFT_Water_Green, NFT_Water_White]}
-          />
+
           <CardsContainer
             isConnected
             ids={[4, 10, 16]}
             names={['Fire', 'Fire', 'Fire']}
             images={[NFT_Fire_Black, NFT_Fire_Green, NFT_Fire_White]}
           />
-          <CardsContainer
+          {/* <CardsContainer
             isConnected
             ids={[5, 11, 17]}
             names={['Metal', 'Metal', 'Metal']}
             images={[NFT_Metal_Black, NFT_Metal_Green, NFT_Metal_White]}
-          />
+          /> */}
           <CardsContainer
             isConnected
             ids={[6, 12, 18]}

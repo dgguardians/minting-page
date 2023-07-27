@@ -23,8 +23,9 @@
     color: white;
   }
   .bgmain{
-    background-image:url('../public/images/BG.jpeg');
-    background-repeat: round;
+    background-image:url('../public/images/BG.webp');
+    background-repeat: repeat;
+    background-size: contain;
   }
 }
 
@@ -57,3 +58,4 @@ a {
     #ff2d55
   );
 }
+

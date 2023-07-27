@@ -40,11 +40,11 @@ export default function Card ({ image, name, isConnected, type, id, pricing }: a
       <span>
         <p
           className={`absolute top-0 w-3/6 rounded-tl-lg  left-0 py-2 px-5 opacity-90  text-center  text-white ${
-            type === 'Legendary'
-              ? 'bg-black'
-              : type === 'Rare'
-              ? 'bg-blue-500'
-              : 'bg-green-500'
+            type === 'Gold'
+              ? 'bg-yellow-400'
+              : type === 'Silver'
+              ? 'bg-slate-300'
+              : 'bg-amber-600'
           }  font-bold`}
         >
           {type}

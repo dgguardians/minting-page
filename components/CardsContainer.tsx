@@ -10,7 +10,7 @@ function CardsContainer ({ images, names, ids }: any) {
         image={images[0]}
         name={names[0]}
         isConnected
-        type='Legendary'
+        type='Gold'
       />
       <Card
         id={ids[1]}
@@ -18,7 +18,7 @@ function CardsContainer ({ images, names, ids }: any) {
         image={images[1]}
         name={names[1]}
         isConnected
-        type='Rare'
+        type='Silver'
       />
       <Card
         id={ids[2]}
@@ -26,7 +26,7 @@ function CardsContainer ({ images, names, ids }: any) {
         image={images[2]}
         name={names[2]}
         isConnected
-        type='Common'
+        type='Copper'
       />
     </div>
   )

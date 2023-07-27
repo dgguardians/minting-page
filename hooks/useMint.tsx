@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
 import contractAbi from '../constants/abi/mint.abi.json'
 import { parseEther } from 'viem'
-import { useAccount, usePrepareContractWrite, useContractWrite } from 'wagmi'
+import { useAccount, usePrepareContractWrite, useContractWrite, useToken } from 'wagmi'
 
 export default function useMint () {
+  const { data, isError, isLoading } = useToken({
+    address: '0x765DE816845861e75A25fCA122bb6898B8B1282a',
+  })
   const { address: rainbowAddress } = useAccount()
   const [id, setid] = useState(0)
   const [price, setPrice] = useState(`${0}` as `${number}`)
