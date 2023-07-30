@@ -5,14 +5,56 @@ import { toast } from 'react-toastify'
 import useMint from '../hooks/useMint'
 import { parseEther } from 'viem'
 
-export default function Card ({ image, name, isConnected, type, id, pricing }: any) {
-  const { mint, setid, setPrice } = useMint()
+export default function Card ({
+  image,
+  name,
+  isConnected,
+  type,
+  id,
+  pricing
+}: any) {
+  const {
+    approve,
+    data,
+    approveLoad,
+    approved,
+    mint,
+    minted,
+    mintLoad,
+    setid,
+    actualId,
+    setPrice
+  } = useMint()
 
   const handleOnClick = () => {
     setid(id)
-    setPrice(pricing)
-    mint?.()
+    console.debug(id)
+    setPrice(BigInt(pricing * 10 ** 18))
+    console.debug(data)
   }
+
+  useEffect(() => {
+    if (id === actualId) {
+      console.debug({ approved }, { minted }, { actualId })
+    }
+    if (approved && !minted && actualId !== 0) {
+      mint?.()
+    } else if (!minted && actualId !== 0) {
+      //@ts-expect-error
+      if (data >= BigInt(pricing * 10 ** 18)) {
+        mint?.()
+      } else {
+        approve?.()
+      }
+    } else if (minted) {
+      toast.success('NFT Minted!', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        onClose: () => window.location.reload()
+      })
+    }
+  }, [approved, minted, actualId])
   return (
     <div className='relative w-auto  backdrop-blur-md rounded-md  shadow-lg p-5'>
       {/* <span className='z-[200] flex items-center justify-center font-bold text-white text-2xl absolute top-0 left-0 right-0 bottom-0 rounded-lg bg-gray-400 opacity-80'>
@@ -54,8 +96,11 @@ export default function Card ({ image, name, isConnected, type, id, pricing }: a
         <h1 className='text-lg font-bold text-start'>{name}</h1>
         {isConnected ? (
           <button
+            disabled={approveLoad || mintLoad}
             onClick={handleOnClick}
-            className='bg-[#4C8030] font-bold w-full text-white py-2 rounded-md'
+            className={`${
+              approveLoad || mintLoad ? 'bg-[#4c8030b7]' : 'bg-[#4C8030]'
+            } font-bold w-full text-white py-2 rounded-md`}
           >
             Mint!
           </button>

@@ -6,7 +6,7 @@ function CardsContainer ({ images, names, ids }: any) {
     <div className='flex flex-wrap flex-row gap-5 w-5/6 md:w-full items-center justify-center'>
       <Card
         id={ids[0]}
-        pricing={'0.02'}
+        pricing={'100'}
         image={images[0]}
         name={names[0]}
         isConnected
@@ -14,7 +14,7 @@ function CardsContainer ({ images, names, ids }: any) {
       />
       <Card
         id={ids[1]}
-        pricing={'0.01'}
+        pricing={'25'}
         image={images[1]}
         name={names[1]}
         isConnected
@@ -22,7 +22,7 @@ function CardsContainer ({ images, names, ids }: any) {
       />
       <Card
         id={ids[2]}
-        pricing={'0.001'}
+        pricing={'1'}
         image={images[2]}
         name={names[2]}
         isConnected

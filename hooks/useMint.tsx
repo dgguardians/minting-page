@@ -1,22 +1,59 @@
 import React, { useState } from 'react'
 import contractAbi from '../constants/abi/mint.abi.json'
-import { parseEther } from 'viem'
-import { useAccount, usePrepareContractWrite, useContractWrite, useToken } from 'wagmi'
+import { zeroAddress } from 'viem'
+import {
+  useAccount,
+  usePrepareContractWrite,
+  useContractWrite,
+  useContractRead,
+  erc20ABI
+} from 'wagmi'
 
 export default function useMint () {
-  const { data, isError, isLoading } = useToken({
-    address: '0x765DE816845861e75A25fCA122bb6898B8B1282a',
-  })
   const { address: rainbowAddress } = useAccount()
   const [id, setid] = useState(0)
-  const [price, setPrice] = useState(`${0}` as `${number}`)
-  const { config } = usePrepareContractWrite({
-    address: '0x3f81a0817aDF6eaD6A1160367cfF52c13F3F0B73',
+  const [price, setPrice] = useState(BigInt(0))
+  const { config: approvalConfig } = usePrepareContractWrite({
+    address: process.env.NEXT_PUBLIC_CUSD_ADDRESS as `0x{string}`,
+    abi: erc20ABI,
+    functionName: 'approve',
+    args: [process.env.NEXT_PUBLIC_NFT_CONTRACT_ADDRESS as `0x{string}`, price]
+  })
+  const {
+    write: approve,
+    isLoading: approveLoad,
+    isSuccess: approved
+  } = useContractWrite(approvalConfig)
+  const { config: mintConfig } = usePrepareContractWrite({
+    address: process.env.NEXT_PUBLIC_NFT_CONTRACT_ADDRESS as `0x{string}`,
     abi: contractAbi,
     functionName: 'mint',
-    args: [rainbowAddress, id, 1],
-    value: parseEther(price),
+    args: [id, 1]
   })
-  const { write: mint } = useContractWrite(config)
-  return { mint, setid, setPrice }
+  const {
+    write: mint,
+    isLoading: mintLoad,
+    isSuccess: minted
+  } = useContractWrite(mintConfig)
+  const { data } = useContractRead({
+    address: process.env.NEXT_PUBLIC_CUSD_ADDRESS as `0x{string}`,
+    abi: erc20ABI,
+    functionName: 'allowance',
+    args: [
+      rainbowAddress ? rainbowAddress : zeroAddress,
+      process.env.NEXT_PUBLIC_NFT_CONTRACT_ADDRESS as `0x{string}`
+    ]
+  })
+  return {
+    approve,
+    approveLoad,
+    approved,
+    mint,
+    minted,
+    mintLoad,
+    data,
+    setid,
+    actualId: id,
+    setPrice
+  }
 }

@@ -30,6 +30,7 @@ import { AnimatePresence } from 'framer-motion'
 import { convertWeb3Address } from '../functions/formatAddress'
 import { FiLogOut } from 'react-icons/fi'
 import { IoClose } from 'react-icons/io5'
+import useMint from '../hooks/useMint'
 
 const Home: NextPage = () => {
   const isDesktop = useDeviceType()
@@ -37,7 +38,6 @@ const Home: NextPage = () => {
   const { isConnected, address: rainbowAddress } = useAccount()
 
   const { connect, disconnect, address } = useCelo()
-
   const handleOnDisconnect = () => {
     disconnect()
     setopenModal(false)
