@@ -43,6 +43,7 @@ export default function Card ({
   }, [approveLoad, mint])
 
   useEffect(() => {
+    console.debug({ mintLoad }, { minted })
     if (minted) {
       toast.success('NFT minted!', {
         toastId: 'flow',
@@ -50,15 +51,8 @@ export default function Card ({
         onClose: () => window.location.reload()
       })
     }
-  }, [minted, mintLoad])
+  }, [minted, mintLoad, approved, approveLoad])
 
-  useEffect(() => {
-    if (approveLoad) {
-      toast.info('Approving transaction...', {
-        toastId: 'flow'
-      })
-    }
-  }, [approveLoad])
 
   useEffect(() => {
     if (actualId !== 0 && !minted && !approved && approve && !approveLoad) {
