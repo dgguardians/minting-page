@@ -8,9 +8,11 @@ import {
   useContractRead,
   erc20ABI
 } from 'wagmi'
+import { useCelo } from '@celo/react-celo'
 
 export default function useMint () {
   const { address: rainbowAddress } = useAccount()
+  const { address: celoAddress } = useCelo()
   const [id, setid] = useState(0)
   const [price, setPrice] = useState(BigInt(0))
   const { config: approvalConfig } = usePrepareContractWrite({
@@ -40,7 +42,8 @@ export default function useMint () {
     abi: erc20ABI,
     functionName: 'allowance',
     args: [
-      rainbowAddress ? rainbowAddress : zeroAddress,
+      // @ts-expect-error
+      rainbowAddress ? rainbowAddress : celoAddress ? celoAddress : zeroAddress,
       process.env.NEXT_PUBLIC_NFT_CONTRACT_ADDRESS as `0x{string}`
     ]
   })
