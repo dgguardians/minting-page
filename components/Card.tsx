@@ -36,10 +36,11 @@ export default function Card ({
   }
 
   useEffect(() => {
+    console.debug({ approved }, mint)
     if (approved && mint && !minted) {
       mint?.()
     }
-  }, [approved, mint])
+  }, [approveLoad])
 
   useEffect(() => {
     if (minted) {
@@ -49,7 +50,7 @@ export default function Card ({
         onClose: () => window.location.reload()
       })
     }
-  }, [minted])
+  }, [minted, mintLoad])
 
   useEffect(() => {
     if (approveLoad) {
