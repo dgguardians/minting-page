@@ -83,10 +83,10 @@ export default function Card ({
         <p
           className={`absolute top-0 w-3/6 rounded-tl-lg  left-0 py-2 px-5 opacity-90  text-center  text-white ${
             type === 'Gold'
-              ? 'bg-yellow-400'
+              ? 'bg-[#C7A44C]'
               : type === 'Silver'
-              ? 'bg-slate-300'
-              : 'bg-amber-600'
+              ? 'bg-[#999EA3]'
+              : 'bg-[#D09D51]'
           }  font-bold`}
         >
           {type}
@@ -100,7 +100,7 @@ export default function Card ({
             onClick={handleOnClick}
             className={`${
               approveLoad || mintLoad ? 'bg-[#4c8030b7]' : 'bg-[#4C8030]'
-            } font-bold w-full text-white py-2 rounded-md`}
+            } font-bold w-full text-white py-2 rounded-md hover:bg-[#70bd46] transition-all duration-200 ease-in-out`}
           >
             Mint!
           </button>
