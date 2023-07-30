@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { toast } from 'react-toastify'
 import useMint from '../hooks/useMint'
@@ -26,6 +26,8 @@ export default function Card ({
     setPrice
   } = useMint()
 
+  // const [isMinted, setisMinted] = useState(false)
+
   const handleOnClick = () => {
     setid(id)
     console.debug(id)
@@ -34,30 +36,36 @@ export default function Card ({
   }
 
   useEffect(() => {
-    if (id === actualId) {
-      console.debug({ approved }, { minted }, { actualId })
-    }
-    if (approved && !minted && actualId !== 0) {
-      console.debug('Minting22')
+    if (approved && mint && !minted) {
       mint?.()
-    } else if (!minted && actualId !== 0) {
-      //@ts-expect-error
-      if (data >= BigInt(pricing * 10 ** 18)) {
-        console.debug('Minting', mint)
-        mint?.()
-      } else {
-        console.debug('Approving', approve)
-        approve?.()
-      }
-    } else if (minted) {
-      toast.success('NFT Minted!', {
-        position: 'top-right',
+    }
+  }, [approved, mint])
+
+  useEffect(() => {
+    if (minted) {
+      toast.success('NFT minted!', {
+        toastId: 'flow',
         autoClose: 5000,
-        hideProgressBar: false,
         onClose: () => window.location.reload()
       })
     }
-  }, [approved, minted, actualId])
+  }, [minted])
+
+  useEffect(() => {
+    if (approveLoad) {
+      toast.info('Approving transaction...', {
+        toastId: 'flow'
+      })
+    }
+  }, [approveLoad])
+
+  useEffect(() => {
+    if (actualId !== 0 && !minted && !approved && approve && !approveLoad) {
+      console.debug('approve')
+      approve?.()
+    }
+  }, [approve])
+
   return (
     <div className='relative w-auto  backdrop-blur-md rounded-md  shadow-lg p-5'>
       {/* <span className='z-[200] flex items-center justify-center font-bold text-white text-2xl absolute top-0 left-0 right-0 bottom-0 rounded-lg bg-gray-400 opacity-80'>
