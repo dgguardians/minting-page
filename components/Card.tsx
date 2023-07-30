@@ -38,12 +38,15 @@ export default function Card ({
       console.debug({ approved }, { minted }, { actualId })
     }
     if (approved && !minted && actualId !== 0) {
+      console.debug('Minting22')
       mint?.()
     } else if (!minted && actualId !== 0) {
       //@ts-expect-error
       if (data >= BigInt(pricing * 10 ** 18)) {
+        console.debug('Minting')
         mint?.()
       } else {
+        console.debug('Approving')
         approve?.()
       }
     } else if (minted) {
