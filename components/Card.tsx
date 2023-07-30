@@ -36,11 +36,11 @@ export default function Card ({
   }
 
   useEffect(() => {
-    console.debug({ approved }, mint)
+    console.debug({ approved }, mint, actualId)
     if (approved && mint && !minted) {
       mint?.()
     }
-  }, [approveLoad])
+  }, [approveLoad, mint])
 
   useEffect(() => {
     if (minted) {
