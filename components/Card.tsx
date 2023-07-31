@@ -4,6 +4,8 @@ import { motion } from 'framer-motion'
 import { toast } from 'react-toastify'
 import useMint from '../hooks/useMint'
 import { parseEther } from 'viem'
+import { useAccount } from 'wagmi'
+import { useCelo } from '@celo/react-celo'
 
 export default function Card ({
   image,
@@ -15,6 +17,7 @@ export default function Card ({
 }: any) {
   const {
     approve,
+    mintCelo,
     data,
     approveLoad,
     approved,
@@ -25,6 +28,9 @@ export default function Card ({
     actualId,
     setPrice
   } = useMint()
+
+  const { address: rainbow } = useAccount()
+  const { address: celo } = useCelo()
 
   // const [isMinted, setisMinted] = useState(false)
 
@@ -37,7 +43,14 @@ export default function Card ({
 
   useEffect(() => {
     console.debug({ approved }, mint, actualId)
-    if (approved && mint && !minted) {
+    if (actualId !== 0 && celo) {
+      mintCelo()
+    }
+  }, [actualId])
+
+  useEffect(() => {
+    console.debug({ approved }, mint, actualId)
+    if (approved && mint && !minted && rainbow) {
       mint?.()
     }
   }, [approveLoad, mint])
@@ -53,9 +66,15 @@ export default function Card ({
     }
   }, [minted, mintLoad, approved, approveLoad])
 
-
   useEffect(() => {
-    if (actualId !== 0 && !minted && !approved && approve && !approveLoad) {
+    if (
+      actualId !== 0 &&
+      !minted &&
+      !approved &&
+      approve &&
+      !approveLoad &&
+      rainbow
+    ) {
       console.debug('approve')
       approve?.()
     }
