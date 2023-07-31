@@ -23,16 +23,18 @@ import {
 } from '@rainbow-me/rainbowkit/wallets'
 
 // Import CELO chain information
-import { celo, celoAlfajores } from 'viem/chains'
+// import { celo, celoAlfajores } from 'viem/chains'
+import { Alfajores, Celo } from "@celo/rainbowkit-celo/chains";
 import useDeviceType from '../hooks/useDevice'
 import { CeloProvider, SupportedProviders } from '@celo/react-celo'
+import { WalletConnectConnector } from 'wagmi/dist/connectors/walletConnect'
 
 const projectId = '7e527e8d641d036dca61031d4bb8b5bc'
 
 function MyApp ({ Component, pageProps }: any) {
   const isDesktop = useDeviceType()
   const { chains, publicClient } = configureChains(
-    [celo, celoAlfajores],
+    [Alfajores, Celo],
     [
       jsonRpcProvider({
         rpc: chain => ({ http: chain.rpcUrls.default.http[0] })
@@ -53,13 +55,14 @@ function MyApp ({ Component, pageProps }: any) {
         omniWallet({ projectId, chains }),
         ledgerWallet({ projectId, chains }),
         coinbaseWallet({ appName: 'DGG Mint', chains }),
+        walletConnectWallet({ projectId, chains })
       ]
     : [
         Valora({ projectId, chains }),
         metaMaskWallet({ projectId, chains }),
       ]
   const connectors = connectorsForWallets([
-    ...wallets,
+    // ...wallets,
     {
       groupName: 'Supports Celo',
       wallets: [...availableWallets]
