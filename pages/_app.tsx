@@ -50,7 +50,6 @@ function MyApp ({ Component, pageProps }: any) {
 
   const availableWallets = isDesktop
     ? [
-        Valora({ projectId, chains }),
         metaMaskWallet({ projectId, chains }),
         ledgerWallet({ projectId, chains }),
         coinbaseWallet({ appName: 'DGG Mint', chains }),
@@ -106,7 +105,6 @@ function MyApp ({ Component, pageProps }: any) {
               hideFromDefaults: [
                 SupportedProviders.MetaMask,
                 SupportedProviders.PrivateKey,
-                SupportedProviders.Valora,
                 SupportedProviders.Ledger,
                 SupportedProviders.Omni,
                 SupportedProviders.CeloDance,
