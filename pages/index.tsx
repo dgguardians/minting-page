@@ -35,7 +35,7 @@ import useMint from '../hooks/useMint'
 const Home: NextPage = () => {
   const isDesktop = useDeviceType()
   const [openModal, setopenModal] = useState(false)
-  const { isConnected, address: rainbowAddress } = useAccount()
+  const { address: rainbowAddress } = useAccount()
 
   const { connect, disconnect, address } = useCelo()
   const handleOnDisconnect = () => {
@@ -55,7 +55,6 @@ const Home: NextPage = () => {
               <IoClose />
             </div>
             <div
-              suppressHydrationWarning
               className=' flex justify-center items-center bg-blue-300 rounded-full '
             >
               <p className='p-2 flex justify-center items-center pb-4 text-4xl'>
@@ -87,8 +86,8 @@ const Home: NextPage = () => {
         <ButtonContainer
           connect={connect}
           disconnect={disconnect}
-          address={address}
-          isConnected={isConnected}
+          CeloAddress={address}
+          RainbowAddress={rainbowAddress}
           isDesktop={isDesktop}
           setopenModal={setopenModal}
         />
