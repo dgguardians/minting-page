@@ -52,13 +52,13 @@ function MyApp ({ Component, pageProps }: any) {
     ? [
         Valora({ projectId, chains }),
         metaMaskWallet({ projectId, chains }),
-        omniWallet({ projectId, chains }),
         ledgerWallet({ projectId, chains }),
         coinbaseWallet({ appName: 'DGG Mint', chains }),
         walletConnectWallet({ projectId, chains })
       ]
-    : [
+      : [
         Valora({ projectId, chains }),
+        coinbaseWallet({ appName: 'DGG Mint', chains }),
         metaMaskWallet({ projectId, chains }),
       ]
   const connectors = connectorsForWallets([
@@ -81,6 +81,10 @@ function MyApp ({ Component, pageProps }: any) {
         theme={lightTheme({
           accentColor: '#4C8030'
         })}
+        appInfo={{
+          appName: 'DG guardias MINT',
+          learnMoreUrl: 'https://dgguardians.com/',
+        }}
         coolMode
         chains={chains}
       >
@@ -109,7 +113,6 @@ function MyApp ({ Component, pageProps }: any) {
                 SupportedProviders.CoinbaseWallet,
                 SupportedProviders.Injected,
                 SupportedProviders.WalletConnect,
-                SupportedProviders.CeloTerminal
               ],
               searchable: false
             }
