@@ -31,7 +31,7 @@ import { convertWeb3Address } from '../functions/formatAddress'
 import { FiLogOut } from 'react-icons/fi'
 import { IoClose } from 'react-icons/io5'
 import Image from 'next/image'
-import banner from '../public/images/LazyBanner.png'
+import banner from '../public/images/LazyBanner.webp'
 import Logo from '../public/favicon.ico'
 import Discord from '../public/images/Discord.png'
 import Twitter from '../public/images/Twitter.png'
@@ -82,9 +82,13 @@ const Home: NextPage = () => {
         </AnimatePresence>
       )}
       <div className='flex relative flex-col gap-2  py-4 justify-center items-center bg-black '>
-      
         <div className='flex flex-row justify-center px-10 w-full items-center'>
-          <Image src={Logo} alt='icon' className='hidden md:inline-block absolute left-2 xl:left-10' height={86} />
+          <Image
+            src={Logo}
+            alt='icon'
+            className='hidden md:inline-block absolute left-2 xl:left-10'
+            height={86}
+          />
           <div className='flex flex-col items-center gap-2'>
             <h1 className={'text-white text-center font-bold text-2xl'}>
               Welcome to{' '}
@@ -153,12 +157,14 @@ const Home: NextPage = () => {
             autoPlay
             muted
             loop
+            preload='none'
             poster='/images/LazyBanner.png'
             src={'/videos/video.mp4'}
             className=' h-full w-screen object-cover transition-opacity '
           />
         ) : (
           <Image
+            priority
             className='w-full object-cover h-full'
             src={banner}
             alt='banner'
@@ -166,13 +172,13 @@ const Home: NextPage = () => {
         )}
       </div>
       <div
-          className='relative bg-black w-full overflow-hidden 
+        className='relative bg-black w-full overflow-hidden 
         h-7'
-        >
-          <p className={` absolute animate text-lg flex-nowrap text-white`}>
-            This collection is cooming soon!
-          </p>
-        </div>
+      >
+        <p className={` absolute animate text-lg flex-nowrap text-white`}>
+          This collection is cooming soon!
+        </p>
+      </div>
       <div className='w-full h-[30vh] bg-slate-50 absolute' />
       <main className={styles.main}>
         {/* <p className={styles.description}>Click to get a fabolous NFT!</p> */}
