@@ -17,7 +17,7 @@ function ButtonContainer ({
     []
 
   return (
-    <div className='flex flex-col md:flex-row gap-2'>
+    <div className='flex flex-col justify-center md:flex-row gap-2'>
       {!CeloAddress && (
         <ConnectButton
           //@ts-expect-error

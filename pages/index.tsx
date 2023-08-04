@@ -30,7 +30,16 @@ import { AnimatePresence } from 'framer-motion'
 import { convertWeb3Address } from '../functions/formatAddress'
 import { FiLogOut } from 'react-icons/fi'
 import { IoClose } from 'react-icons/io5'
-import useMint from '../hooks/useMint'
+import banner from '../public/images/LazyBanner.png'
+import Image from 'next/image'
+import Logo from '../public/favicon.ico'
+import Discord from '../public/images/discord.png'
+import Twitter from '../public/images/twitter.png'
+import Instagram from '../public/images/instagram.png'
+import Telegram from '../public/images/telegram.png'
+import Linkedin from '../public/images/linkedin.png'
+import Youtube from '../public/images/youtube.png'
+import Link from 'next/link'
 
 const Home: NextPage = () => {
   const isDesktop = useDeviceType()
@@ -54,9 +63,7 @@ const Home: NextPage = () => {
             >
               <IoClose />
             </div>
-            <div
-              className=' flex justify-center items-center bg-blue-300 rounded-full '
-            >
+            <div className=' flex justify-center items-center bg-blue-300 rounded-full '>
               <p className='p-2 flex justify-center items-center pb-4 text-4xl'>
                 🐒
               </p>
@@ -74,23 +81,67 @@ const Home: NextPage = () => {
           </Modal>
         </AnimatePresence>
       )}
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to{' '}
-          <span className='text-[#4C8030] font-bold'>
-            {' '}
-            Green Digital Guardians
-          </span>
-        </h1>
-        <p className={styles.description}>This collection is cooming soon!</p>
-        <ButtonContainer
-          connect={connect}
-          disconnect={disconnect}
-          CeloAddress={address}
-          RainbowAddress={rainbowAddress}
-          isDesktop={isDesktop}
-          setopenModal={setopenModal}
+      <div className='flex relative flex-col gap-2  py-4 justify-center items-center bg-black '>
+        <div
+          className='relative w-full overflow-hidden 
+        h-7'
+        >
+          <p className={` absolute animate text-lg flex-nowrap text-white`}>
+            This collection is cooming soon!
+          </p>
+        </div>
+        <div className='grid grid-cols-3 justify-between px-10 w-full items-center'>
+          <Image src={Logo} alt='icon' className='ml-10' height={86} />
+          <div className='flex flex-col gap-2'>
+            <h1 className={'text-white text-center font-bold text-2xl'}>
+              Welcome to{' '}
+              <span className='text-[#4C8030] font-bold'>
+                Green Digital Guardians
+              </span>
+            </h1>
+            <ButtonContainer
+              connect={connect}
+              disconnect={disconnect}
+              CeloAddress={address}
+              RainbowAddress={rainbowAddress}
+              isDesktop={isDesktop}
+              setopenModal={setopenModal}
+            />
+          </div>
+          <div className='flex flex-row justify-center  w-full place-self-center items-center gap-5'>
+            <Link rel='stylesheet' target='_blank' href='https://twitter.com/dg_guardians'>
+              <Image src={Twitter} alt='icon' height={28} />
+            </Link>
+            <Link rel='stylesheet' target='_blank' href='https://www.instagram.com/dg_guardians/'>
+              <Image src={Instagram} alt='icon' height={28} />
+            </Link>
+            <Link rel='stylesheet' target='_blank' href='https://www.linkedin.com/company/dg-guardians/'>
+              <Image src={Linkedin} alt='icon' height={28} />
+            </Link>
+            <Link rel='stylesheet' target='_blank' href='https://www.youtube.com/@dgguardians'>
+              <Image src={Youtube} alt='icon' height={28} />
+            </Link>
+            <Link rel='stylesheet' target='_blank' href='https://t.me/dg_guardians'>
+              <Image src={Telegram} alt='icon' height={28} />
+            </Link>
+            <Link rel='stylesheet' target='_blank' href='https://discord.gg/srfUUPfgXH'>
+              <Image src={Discord} alt='icon' height={28} />
+            </Link>
+          </div>
+        </div>
+      </div>
+      <div className='w-full h-[70vh] shadow-lg '>
+        <video
+          autoPlay
+          muted
+          poster='/images/LazyBanner.png'
+          src={'/videos/video.mp4'}
+          className=' h-full w-screen object-cover'
         />
+        {/* <Image className='w-full ' src={banner} alt='banner' /> */}
+      </div>
+      <div className='w-full h-[30vh] bg-slate-50 absolute' />
+      <main className={styles.main}>
         {/* <p className={styles.description}>Click to get a fabolous NFT!</p> */}
         <div className='flex flex-wrap   flex-row w-full  justify-center items-center gap-4 m-10'>
           <CardsContainer

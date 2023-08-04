@@ -81,7 +81,7 @@ export default function Card ({
   }, [approve])
 
   return (
-    <div className='relative w-auto  backdrop-blur-md rounded-md  shadow-lg p-5'>
+    <div className='relative w-auto bg-black bg-opacity-5  backdrop-blur-md rounded-md  shadow-lg p-5'>
       {/* <span className='z-[200] flex items-center justify-center font-bold text-white text-2xl absolute top-0 left-0 right-0 bottom-0 rounded-lg bg-gray-400 opacity-80'>
         <h1>Comming soon!</h1>
       </span> */}
