@@ -37,7 +37,7 @@ import Discord from '../public/images/Discord.png'
 import Twitter from '../public/images/Twitter.png'
 import Instagram from '../public/images/Instagram.png'
 import Telegram from '../public/images/Telegram.png'
-import Linkedin from '../public/images/Linkedin.png'
+import Linkedin from '../public/images/LinkedIn.png'
 import Youtube from '../public/images/Youtube.png'
 import Link from 'next/link'
 
