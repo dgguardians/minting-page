@@ -43,6 +43,7 @@ export default function Card ({
   }
 
   useEffect(() => {
+    console.debug(rainbow, actualId, data, approved, approveLoad, minted, mintLoad, mint)
     if (mintError || approvalError) {
       toast.error('Something went wrong, try again later', {
         toastId: 'flow',
