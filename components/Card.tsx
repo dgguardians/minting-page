@@ -18,7 +18,10 @@ export default function Card ({
   const {
     approve,
     mintCelo,
+    mintError,
+    approvalError,
     data,
+    refetch,
     approveLoad,
     approved,
     mint,
@@ -36,49 +39,47 @@ export default function Card ({
 
   const handleOnClick = () => {
     setid(id)
-    console.debug(id)
     setPrice(BigInt(pricing * 10 ** 18))
-    console.debug(data)
   }
 
   useEffect(() => {
-    console.debug({ approved }, mint, actualId)
-    if (actualId !== 0 && celo) {
-      mintCelo()
+    if (mintError || approvalError) {
+      toast.error('Something went wrong, try again later', {
+        toastId: 'flow',
+        autoClose: 5000,
+        onClose: () => window.location.reload()
+      })
+      console.error(mintError)
+      return
     }
-  }, [actualId])
 
-  useEffect(() => {
-    console.debug({ approved }, mint, actualId)
-    if (approved && mint && !minted && rainbow) {
-      mint?.()
-    }
-  }, [approveLoad, mint])
-
-  useEffect(() => {
-    console.debug({ mintLoad }, { minted })
     if (minted) {
       toast.success('NFT minted!', {
         toastId: 'flow',
         autoClose: 5000,
         onClose: () => window.location.reload()
       })
+      return
     }
-  }, [minted, mintLoad, approved, approveLoad])
+    if (rainbow && actualId !== 0 && typeof data !== undefined) {
+      // @ts-expect-error
+      if (BigInt(pricing * 10 ** 18) > data) {
+        refetch()
+        if (!approved && approve && !approveLoad) {
+          approve?.()
+        }
+      } else if (!minted && mint && !mintLoad) {
+        mint?.()
+        console.debug('por alguna razon pase aqui')
+      }
+    }
+  }, [rainbow, actualId, data, approved, approveLoad, minted, mintLoad, mint])
 
   useEffect(() => {
-    if (
-      actualId !== 0 &&
-      !minted &&
-      !approved &&
-      approve &&
-      !approveLoad &&
-      rainbow
-    ) {
-      console.debug('approve')
-      approve?.()
+    if (actualId !== 0 && celo) {
+      mintCelo()
     }
-  }, [approve])
+  }, [actualId])
 
   return (
     <div className='relative w-auto bg-black bg-opacity-5  backdrop-blur-md rounded-md  shadow-lg p-5'>

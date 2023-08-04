@@ -29,7 +29,7 @@ function ButtonContainer ({
           }}
         />
       )}
-      {isDesktop && CeloAddress && (
+      {isDesktop && CeloAddress && isMounted && (
         <div
           onClick={() => setopenModal(true)}
           className='flex connectedShadow  flex-row justify-center bg-white px-1 rounded-lg hover:scale-105 transition duration-100 ease-in-out  items-center '

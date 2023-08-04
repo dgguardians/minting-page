@@ -46,29 +46,29 @@ export default function useMint () {
     })
     return tx
   }
-  const { config: approvalConfig } = usePrepareContractWrite({
+  const {
+    write: approve,
+    isLoading: approveLoad,
+    isSuccess: approved,
+    isError: approvalError
+  } = useContractWrite({
     address: process.env.NEXT_PUBLIC_CUSD_ADDRESS as `0x{string}`,
     abi: erc20ABI,
     functionName: 'approve',
     args: [process.env.NEXT_PUBLIC_NFT_CONTRACT_ADDRESS as `0x{string}`, price]
   })
   const {
-    write: approve,
-    isLoading: approveLoad,
-    isSuccess: approved
-  } = useContractWrite(approvalConfig)
-  const { config: mintConfig } = usePrepareContractWrite({
+    write: mint,
+    isLoading: mintLoad,
+    isSuccess: minted,
+    isError: mintError
+  } = useContractWrite({
     address: process.env.NEXT_PUBLIC_NFT_CONTRACT_ADDRESS as `0x{string}`,
     abi: contractAbi,
     functionName: 'mint',
     args: [id, 1]
   })
-  const {
-    write: mint,
-    isLoading: mintLoad,
-    isSuccess: minted
-  } = useContractWrite(mintConfig)
-  const { data } = useContractRead({
+  const { data , refetch} = useContractRead({
     address: process.env.NEXT_PUBLIC_CUSD_ADDRESS as `0x{string}`,
     abi: erc20ABI,
     functionName: 'allowance',
@@ -76,17 +76,21 @@ export default function useMint () {
       // @ts-expect-error
       rainbowAddress ? rainbowAddress : celoAddress ? celoAddress : zeroAddress,
       process.env.NEXT_PUBLIC_NFT_CONTRACT_ADDRESS as `0x{string}`
-    ]
+    ],
+    watch: true
   })
   return {
     mintCelo: mintNFT,
     approve,
     approveLoad,
     approved,
+    approvalError,
     mint,
     minted,
     mintLoad,
+    mintError,
     data,
+    refetch,
     setid,
     actualId: id,
     setPrice
