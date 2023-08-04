@@ -82,14 +82,7 @@ const Home: NextPage = () => {
         </AnimatePresence>
       )}
       <div className='flex relative flex-col gap-2  py-4 justify-center items-center bg-black '>
-        <div
-          className='relative w-full overflow-hidden 
-        h-7'
-        >
-          <p className={` absolute animate text-lg flex-nowrap text-white`}>
-            This collection is cooming soon!
-          </p>
-        </div>
+      
         <div className='flex flex-row justify-center px-10 w-full items-center'>
           <Image src={Logo} alt='icon' className='hidden md:inline-block absolute left-2 xl:left-10' height={86} />
           <div className='flex flex-col items-center gap-2'>
@@ -159,6 +152,7 @@ const Home: NextPage = () => {
           <video
             autoPlay
             muted
+            loop
             poster='/images/LazyBanner.png'
             src={'/videos/video.mp4'}
             className=' h-full w-screen object-cover transition-opacity '
@@ -171,6 +165,14 @@ const Home: NextPage = () => {
           />
         )}
       </div>
+      <div
+          className='relative bg-black w-full overflow-hidden 
+        h-7'
+        >
+          <p className={` absolute animate text-lg flex-nowrap text-white`}>
+            This collection is cooming soon!
+          </p>
+        </div>
       <div className='w-full h-[30vh] bg-slate-50 absolute' />
       <main className={styles.main}>
         {/* <p className={styles.description}>Click to get a fabolous NFT!</p> */}
