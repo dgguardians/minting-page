@@ -24,7 +24,7 @@ import { CardsContainer } from '../components/CardsContainer'
 import { useCelo } from '@celo/react-celo'
 import useDeviceType from '../hooks/useDevice'
 import ButtonContainer from '../components/ButtonContainer'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Modal from '../components/Modal'
 import { AnimatePresence } from 'framer-motion'
 import { convertWeb3Address } from '../functions/formatAddress'
@@ -52,8 +52,31 @@ const Home: NextPage = () => {
     setopenModal(false)
   }
 
+  const videoRef = useRef<HTMLVideoElement>(null)
+
+  useEffect(() => {
+    // Función para cargar el video cuando la página esté completamente cargada
+    const loadVideo = () => {
+      const videoElement = videoRef.current
+      if (videoElement) {
+        videoElement.src = '/videos/video.mp4'
+        videoElement.autoplay = true
+        videoElement.muted = true
+        videoElement.loop = true
+        videoElement.preload = 'auto'
+      }
+    }
+
+    // Evento window.onload para asegurarse de que la página esté completamente cargada
+    window.onload = loadVideo
+
+    // Opcional: Detener el evento window.onload cuando el componente se desmonte
+    return () => {
+      window.onload = null
+    }
+  }, [])
   return (
-    <section className={`${styles.container} bgmain  h-full`}>
+    <section className={`${styles.container}   h-full`}>
       {openModal && (
         <AnimatePresence>
           <Modal>
@@ -151,20 +174,14 @@ const Home: NextPage = () => {
           </div>
         </div>
       </div>
-      <div className='w-full h-[70vh] shadow-lg '>
+      <div className='w-full bannerLazy h-[70vh] shadow-lg '>
         {isDesktop ? (
           <video
-            autoPlay
-            muted
-            loop
-            preload='none'
-            poster='/images/LazyBanner.png'
-            src={'/videos/video.mp4'}
-            className=' h-full w-screen object-cover transition-opacity '
+            ref={videoRef}
+            className='h-full w-screen object-cover transition-opacity'
           />
         ) : (
           <Image
-            priority
             className='w-full object-cover h-full'
             src={banner}
             alt='banner'
@@ -180,7 +197,7 @@ const Home: NextPage = () => {
         </p>
       </div>
       <div className='w-full h-[30vh] bg-slate-50 absolute' />
-      <main className={styles.main}>
+      <main className={`${styles.main} bgmain`}>
         {/* <p className={styles.description}>Click to get a fabolous NFT!</p> */}
         <div className='flex flex-wrap   flex-row w-full  justify-center items-center gap-4 m-10'>
           <CardsContainer
