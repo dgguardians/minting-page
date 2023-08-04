@@ -90,9 +90,9 @@ const Home: NextPage = () => {
             This collection is cooming soon!
           </p>
         </div>
-        <div className='grid grid-cols-3 justify-between px-10 w-full items-center'>
-          <Image src={Logo} alt='icon' className='ml-10' height={86} />
-          <div className='flex flex-col gap-2'>
+        <div className='flex flex-row justify-center px-10 w-full items-center'>
+          <Image src={Logo} alt='icon' className='hidden md:inline-block absolute left-2 xl:left-10' height={86} />
+          <div className='flex flex-col items-center gap-2'>
             <h1 className={'text-white text-center font-bold text-2xl'}>
               Welcome to{' '}
               <span className='text-[#4C8030] font-bold'>
@@ -108,37 +108,68 @@ const Home: NextPage = () => {
               setopenModal={setopenModal}
             />
           </div>
-          <div className='flex flex-row justify-center  w-full place-self-center items-center gap-5'>
-            <Link rel='stylesheet' target='_blank' href='https://twitter.com/dg_guardians'>
+          <div className='lg:flex flex-row absolute hidden right-2 xl:right-10 justify-center   items-center gap-5'>
+            <Link
+              rel='stylesheet'
+              target='_blank'
+              href='https://twitter.com/dg_guardians'
+            >
               <Image src={Twitter} alt='icon' height={28} />
             </Link>
-            <Link rel='stylesheet' target='_blank' href='https://www.instagram.com/dg_guardians/'>
+            <Link
+              rel='stylesheet'
+              target='_blank'
+              href='https://www.instagram.com/dg_guardians/'
+            >
               <Image src={Instagram} alt='icon' height={28} />
             </Link>
-            <Link rel='stylesheet' target='_blank' href='https://www.linkedin.com/company/dg-guardians/'>
+            <Link
+              rel='stylesheet'
+              target='_blank'
+              href='https://www.linkedin.com/company/dg-guardians/'
+            >
               <Image src={Linkedin} alt='icon' height={28} />
             </Link>
-            <Link rel='stylesheet' target='_blank' href='https://www.youtube.com/@dgguardians'>
+            <Link
+              rel='stylesheet'
+              target='_blank'
+              href='https://www.youtube.com/@dgguardians'
+            >
               <Image src={Youtube} alt='icon' height={28} />
             </Link>
-            <Link rel='stylesheet' target='_blank' href='https://t.me/dg_guardians'>
+            <Link
+              rel='stylesheet'
+              target='_blank'
+              href='https://t.me/dg_guardians'
+            >
               <Image src={Telegram} alt='icon' height={28} />
             </Link>
-            <Link rel='stylesheet' target='_blank' href='https://discord.gg/srfUUPfgXH'>
+            <Link
+              rel='stylesheet'
+              target='_blank'
+              href='https://discord.gg/srfUUPfgXH'
+            >
               <Image src={Discord} alt='icon' height={28} />
             </Link>
           </div>
         </div>
       </div>
       <div className='w-full h-[70vh] shadow-lg '>
-        <video
-          autoPlay
-          muted
-          poster='/images/LazyBanner.png'
-          src={'/videos/video.mp4'}
-          className=' h-full w-screen object-cover'
-        />
-        {/* <Image className='w-full ' src={banner} alt='banner' /> */}
+        {isDesktop ? (
+          <video
+            autoPlay
+            muted
+            poster='/images/LazyBanner.png'
+            src={'/videos/video.mp4'}
+            className=' h-full w-screen object-cover transition-opacity '
+          />
+        ) : (
+          <Image
+            className='w-full object-cover h-full'
+            src={banner}
+            alt='banner'
+          />
+        )}
       </div>
       <div className='w-full h-[30vh] bg-slate-50 absolute' />
       <main className={styles.main}>
