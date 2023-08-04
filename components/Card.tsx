@@ -133,8 +133,8 @@ export default function Card ({
           </button>
         ) : (
           <span>
-            <h2 className='bg-[#4C8030] font-bold w-full text-white py-2 px-2 rounded-md'>
-              Connect your wallet to get a NFT
+            <h2 className='bg-[#3f5f2eb7] text-center font-bold w-full text-white py-2 px-2 rounded-md'>
+              Connect your wallet
             </h2>
           </span>
         )}

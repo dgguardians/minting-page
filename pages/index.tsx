@@ -196,43 +196,43 @@ const Home: NextPage = () => {
           This collection is cooming soon!
         </p>
       </div>
-      <div className='w-full h-[30vh] bg-slate-50 absolute' />
+      <div className='w-full h-[20vh] bg-slate-50 absolute' />
       <main className={`${styles.main} bgmain`}>
         {/* <p className={styles.description}>Click to get a fabolous NFT!</p> */}
         <div className='flex flex-wrap   flex-row w-full  justify-center items-center gap-4 m-10'>
           <CardsContainer
-            isConnected
+            isConnected={rainbowAddress || address}
             ids={[3, 9, 15]}
             names={['Water', 'Water', 'Water']}
             images={[NFT_Water_Black, NFT_Water_Green, NFT_Water_White]}
           />
           <CardsContainer
-            isConnected
+            isConnected={rainbowAddress || address}
             ids={[1, 7, 13]}
             names={['Earth', 'Earth', 'Earth']}
             images={[NFT_Earth_Black, NFT_Earth_Green, NFT_Earth_White]}
           />
           <CardsContainer
-            isConnected
+            isConnected={rainbowAddress || address}
             ids={[2, 8, 14]}
             names={['Air', 'Air', 'Air']}
             images={[NFT_Air_Black, NFT_Air_Green, NFT_Air_White]}
           />
 
           <CardsContainer
-            isConnected
+            isConnected={rainbowAddress || address}
             ids={[4, 10, 16]}
             names={['Fire', 'Fire', 'Fire']}
             images={[NFT_Fire_Black, NFT_Fire_Green, NFT_Fire_White]}
           />
           <CardsContainer
-            isConnected
+            isConnected={rainbowAddress || address}
             ids={[5, 11, 17]}
             names={['Metal', 'Metal', 'Metal']}
             images={[NFT_Metal_Black, NFT_Metal_Green, NFT_Metal_White]}
           />
           <CardsContainer
-            isConnected
+            isConnected={rainbowAddress || address}
             ids={[6, 12, 18]}
             names={['Space', 'Space', 'Space']}
             images={[NFT_Space_Black, NFT_Space_Green, NFT_Space_White]}
