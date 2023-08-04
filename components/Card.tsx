@@ -6,6 +6,7 @@ import useMint from '../hooks/useMint'
 import { parseEther } from 'viem'
 import { useAccount } from 'wagmi'
 import { useCelo } from '@celo/react-celo'
+import useDeviceType from '../hooks/useDevice'
 
 export default function Card ({
   image,
@@ -34,7 +35,7 @@ export default function Card ({
 
   const { address: rainbow } = useAccount()
   const { address: celo } = useCelo()
-
+  const isDesktop = useDeviceType()
   // const [isMinted, setisMinted] = useState(false)
 
   const handleOnClick = () => {
@@ -43,7 +44,7 @@ export default function Card ({
   }
 
   useEffect(() => {
-    console.debug(rainbow, actualId, data, approved, approveLoad, minted, mintLoad, mint)
+    if (!isDesktop) return
     if (mintError || approvalError) {
       toast.error('Something went wrong, try again later', {
         toastId: 'flow',
