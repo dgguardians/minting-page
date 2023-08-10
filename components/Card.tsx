@@ -169,16 +169,17 @@ export default function Card ({
   useEffect(() => {
     console.debug(mintError, approvalError)
     if (mintError || approvalError) {
-      alert(mintErrorData || approveErrorData)
-      // toast.error('Something went wrong, please try again later', {
-      //   position: toast.POSITION.BOTTOM_RIGHT,
-      //   autoClose: 5000,
-      //   hideProgressBar: false,
-      //   closeOnClick: true,
-      //   onClose: () => window.location.reload(),
-      //   draggable: true,
-      //   toastId: 'error'
-      // })
+      console.error(mintError || approvalError)
+      // alert(mintErrorData || approveErrorData)
+      toast.error('Something went wrong, please try again later', {
+        position: toast.POSITION.BOTTOM_RIGHT,
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        onClose: () => window.location.reload(),
+        draggable: true,
+        toastId: 'error'
+      })
     }
     setIsTransaction(false)
   }, [mintError, approvalError])
