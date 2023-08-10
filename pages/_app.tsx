@@ -34,7 +34,7 @@ const projectId = '7e527e8d641d036dca61031d4bb8b5bc'
 function MyApp ({ Component, pageProps }: any) {
   const isDesktop = useDeviceType()
   const { chains, publicClient } = configureChains(
-    [Alfajores, Celo],
+    [Alfajores],
     [
       jsonRpcProvider({
         rpc: chain => ({ http: chain.rpcUrls.default.http[0] })
