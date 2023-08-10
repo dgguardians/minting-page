@@ -58,6 +58,9 @@ export default function useMint () {
     functionName: 'approve',
     args: [process.env.NEXT_PUBLIC_NFT_CONTRACT_ADDRESS as `0x{string}`, price]
   })
+  console.debug(process.env.NEXT_PUBLIC_NFT_CONTRACT_ADDRESS as `0x{string}`, {
+    args: [id, 1]
+  })
   const {
     write: mint,
     isLoading: mintLoad,
@@ -70,7 +73,7 @@ export default function useMint () {
     functionName: 'mint',
     args: [id, 1]
   })
-  const { data , refetch} = useContractRead({
+  const { data, refetch } = useContractRead({
     address: process.env.NEXT_PUBLIC_CUSD_ADDRESS as `0x{string}`,
     abi: erc20ABI,
     functionName: 'allowance',
