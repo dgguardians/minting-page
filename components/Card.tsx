@@ -228,7 +228,7 @@ export default function Card ({
                 </button>
               ) : (
                 <p className='font-bold text-gray-500'>
-                  It won't take too long
+                  It won&apos;t take too long
                 </p>
               )}
             </motion.div>
