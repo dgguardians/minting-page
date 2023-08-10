@@ -18,7 +18,7 @@ function ButtonContainer ({
 
   return (
     <div className='flex flex-col justify-center md:flex-row gap-2'>
-      {!CeloAddress && (
+      {!CeloAddress && isMounted && (
         <ConnectButton
           //@ts-expect-error
           className='w-full'
@@ -45,7 +45,7 @@ function ButtonContainer ({
       {/* To do, this is pretty ugly but works. */}
       {isDesktop && !CeloAddress && !RainbowAddress && isMounted && (
         <button
-          className='rounded-xl shadow-lg font-bold px-4 py-2 bg-[#4C8030] text-white hover:transform   '
+          className='rounded-xl shadow-lg font-bold px-4 py-2 bg-[#4C8030] text-white hover:transform-gpu hover:scale-105 transition duration-100 ease-in-out   '
           onClick={connect}
         >
           Connect Celo Wallet

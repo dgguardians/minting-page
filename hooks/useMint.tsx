@@ -40,7 +40,7 @@ export default function useMint () {
       feeCurrency: cUSD.address
     })
     toast.success('NFT minted!', {
-      toastId: 'flow',
+      toastId: 'sucess',
       autoClose: 5000,
       onClose: () => window.location.reload()
     })
