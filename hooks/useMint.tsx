@@ -50,7 +50,8 @@ export default function useMint () {
     write: approve,
     isLoading: approveLoad,
     isSuccess: approved,
-    isError: approvalError
+    isError: approvalError,
+    error: approveErrorData
   } = useContractWrite({
     address: process.env.NEXT_PUBLIC_CUSD_ADDRESS as `0x{string}`,
     abi: erc20ABI,
@@ -61,7 +62,8 @@ export default function useMint () {
     write: mint,
     isLoading: mintLoad,
     isSuccess: minted,
-    isError: mintError
+    isError: mintError,
+    error: mintErrorData
   } = useContractWrite({
     address: process.env.NEXT_PUBLIC_NFT_CONTRACT_ADDRESS as `0x{string}`,
     abi: contractAbi,
@@ -85,10 +87,12 @@ export default function useMint () {
     approveLoad,
     approved,
     approvalError,
+    approveErrorData,
     mint,
     minted,
     mintLoad,
     mintError,
+    mintErrorData,
     data,
     refetch,
     setid,

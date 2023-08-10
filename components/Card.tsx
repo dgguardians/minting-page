@@ -21,6 +21,8 @@ export default function Card ({
     approve,
     mintCelo,
     mintError,
+    mintErrorData,
+    approveErrorData,
     approvalError,
     data,
     refetch,
@@ -167,15 +169,16 @@ export default function Card ({
   useEffect(() => {
     console.debug(mintError, approvalError)
     if (mintError || approvalError) {
-      toast.error('Something went wrong, please try again later', {
-        position: toast.POSITION.BOTTOM_RIGHT,
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        onClose: () => window.location.reload(),
-        draggable: true,
-        toastId: 'error'
-      })
+      alert(mintErrorData || approveErrorData)
+      // toast.error('Something went wrong, please try again later', {
+      //   position: toast.POSITION.BOTTOM_RIGHT,
+      //   autoClose: 5000,
+      //   hideProgressBar: false,
+      //   closeOnClick: true,
+      //   onClose: () => window.location.reload(),
+      //   draggable: true,
+      //   toastId: 'error'
+      // })
     }
     setIsTransaction(false)
   }, [mintError, approvalError])
