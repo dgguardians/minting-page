@@ -4,12 +4,13 @@ import {
   connectorsForWallets,
   getDefaultWallets,
   RainbowKitProvider,
+  AvatarComponent,
   lightTheme
 } from '@rainbow-me/rainbowkit'
 import { configureChains, createConfig, WagmiConfig } from 'wagmi'
 import { jsonRpcProvider } from 'wagmi/providers/jsonRpc'
 import { ToastContainer } from 'react-toastify'
-
+import celoLogo from '../public/images/celo-logo.svg'
 import '@celo/react-celo/lib/styles.css'
 import 'react-toastify/dist/ReactToastify.css'
 // Import known recommended wallets
@@ -23,16 +24,19 @@ import {
 } from '@rainbow-me/rainbowkit/wallets'
 
 // Import CELO chain information
-import { celo, celoAlfajores } from 'viem/chains'
+// import { celo, celoAlfajores } from 'viem/chains'
+import { Alfajores, Celo } from '@celo/rainbowkit-celo/chains'
 import useDeviceType from '../hooks/useDevice'
 import { CeloProvider, SupportedProviders } from '@celo/react-celo'
+import { WalletConnectConnector } from 'wagmi/dist/connectors/walletConnect'
+import Image from 'next/image'
 
 const projectId = '7e527e8d641d036dca61031d4bb8b5bc'
 
 function MyApp ({ Component, pageProps }: any) {
   const isDesktop = useDeviceType()
   const { chains, publicClient } = configureChains(
-    [celo, celoAlfajores],
+    [Alfajores],
     [
       jsonRpcProvider({
         rpc: chain => ({ http: chain.rpcUrls.default.http[0] })
@@ -48,18 +52,18 @@ function MyApp ({ Component, pageProps }: any) {
 
   const availableWallets = isDesktop
     ? [
-        Valora({ projectId, chains }),
         metaMaskWallet({ projectId, chains }),
-        omniWallet({ projectId, chains }),
         ledgerWallet({ projectId, chains }),
         coinbaseWallet({ appName: 'DGG Mint', chains }),
+        walletConnectWallet({ projectId, chains })
       ]
     : [
         Valora({ projectId, chains }),
-        metaMaskWallet({ projectId, chains }),
+        coinbaseWallet({ appName: 'DGG Mint', chains }),
+        metaMaskWallet({ projectId, chains })
       ]
   const connectors = connectorsForWallets([
-    ...wallets,
+    // ...wallets,
     {
       groupName: 'Supports Celo',
       wallets: [...availableWallets]
@@ -72,12 +76,30 @@ function MyApp ({ Component, pageProps }: any) {
     publicClient: publicClient
   })
 
+  const CustomAvatar: AvatarComponent = ({ address, ensImage, size }) => {
+    const color = 'transparent'
+    return (
+      <Image
+        src={celoLogo}
+        width={size}
+        height={size}
+        alt='Celo Logo'
+        style={{ borderRadius: 999 }}
+      />
+    )
+  }
+
   return (
     <WagmiConfig config={wagmiConfig}>
       <RainbowKitProvider
         theme={lightTheme({
           accentColor: '#4C8030'
         })}
+        avatar={CustomAvatar}
+        appInfo={{
+          appName: 'DG guardias MINT',
+          learnMoreUrl: 'https://dgguardians.com/'
+        }}
         coolMode
         chains={chains}
       >
@@ -99,14 +121,12 @@ function MyApp ({ Component, pageProps }: any) {
               hideFromDefaults: [
                 SupportedProviders.MetaMask,
                 SupportedProviders.PrivateKey,
-                SupportedProviders.Valora,
                 SupportedProviders.Ledger,
                 SupportedProviders.Omni,
                 SupportedProviders.CeloDance,
                 SupportedProviders.CoinbaseWallet,
                 SupportedProviders.Injected,
-                SupportedProviders.WalletConnect,
-                SupportedProviders.CeloTerminal
+                SupportedProviders.WalletConnect
               ],
               searchable: false
             }
