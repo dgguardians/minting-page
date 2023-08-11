@@ -4,12 +4,13 @@ import {
   connectorsForWallets,
   getDefaultWallets,
   RainbowKitProvider,
+  AvatarComponent,
   lightTheme
 } from '@rainbow-me/rainbowkit'
 import { configureChains, createConfig, WagmiConfig } from 'wagmi'
 import { jsonRpcProvider } from 'wagmi/providers/jsonRpc'
 import { ToastContainer } from 'react-toastify'
-
+import celoLogo from '../public/images/celo-logo.svg'
 import '@celo/react-celo/lib/styles.css'
 import 'react-toastify/dist/ReactToastify.css'
 // Import known recommended wallets
@@ -28,6 +29,7 @@ import { Alfajores, Celo } from '@celo/rainbowkit-celo/chains'
 import useDeviceType from '../hooks/useDevice'
 import { CeloProvider, SupportedProviders } from '@celo/react-celo'
 import { WalletConnectConnector } from 'wagmi/dist/connectors/walletConnect'
+import Image from 'next/image'
 
 const projectId = '7e527e8d641d036dca61031d4bb8b5bc'
 
@@ -74,12 +76,26 @@ function MyApp ({ Component, pageProps }: any) {
     publicClient: publicClient
   })
 
+  const CustomAvatar: AvatarComponent = ({ address, ensImage, size }) => {
+    const color = 'transparent'
+    return (
+      <Image
+        src={celoLogo}
+        width={size}
+        height={size}
+        alt='Celo Logo'
+        style={{ borderRadius: 999 }}
+      />
+    )
+  }
+
   return (
     <WagmiConfig config={wagmiConfig}>
       <RainbowKitProvider
         theme={lightTheme({
           accentColor: '#4C8030'
         })}
+        avatar={CustomAvatar}
         appInfo={{
           appName: 'DG guardias MINT',
           learnMoreUrl: 'https://dgguardians.com/'

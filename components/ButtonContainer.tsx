@@ -24,8 +24,8 @@ function ButtonContainer ({
           className='w-full'
           label={'Connect Web3 Wallet'}
           accountStatus={{
-            smallScreen: 'address',
-            largeScreen: 'address'
+            smallScreen: 'avatar',
+            largeScreen: 'avatar'
           }}
         />
       )}
