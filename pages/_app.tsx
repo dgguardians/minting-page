@@ -24,7 +24,7 @@ import {
 
 // Import CELO chain information
 // import { celo, celoAlfajores } from 'viem/chains'
-import { Alfajores, Celo } from "@celo/rainbowkit-celo/chains";
+import { Alfajores, Celo } from '@celo/rainbowkit-celo/chains'
 import useDeviceType from '../hooks/useDevice'
 import { CeloProvider, SupportedProviders } from '@celo/react-celo'
 import { WalletConnectConnector } from 'wagmi/dist/connectors/walletConnect'
@@ -55,10 +55,10 @@ function MyApp ({ Component, pageProps }: any) {
         coinbaseWallet({ appName: 'DGG Mint', chains }),
         walletConnectWallet({ projectId, chains })
       ]
-      : [
+    : [
         Valora({ projectId, chains }),
         coinbaseWallet({ appName: 'DGG Mint', chains }),
-        metaMaskWallet({ projectId, chains }),
+        metaMaskWallet({ projectId, chains })
       ]
   const connectors = connectorsForWallets([
     // ...wallets,
@@ -82,7 +82,7 @@ function MyApp ({ Component, pageProps }: any) {
         })}
         appInfo={{
           appName: 'DG guardias MINT',
-          learnMoreUrl: 'https://dgguardians.com/',
+          learnMoreUrl: 'https://dgguardians.com/'
         }}
         coolMode
         chains={chains}
@@ -110,7 +110,7 @@ function MyApp ({ Component, pageProps }: any) {
                 SupportedProviders.CeloDance,
                 SupportedProviders.CoinbaseWallet,
                 SupportedProviders.Injected,
-                SupportedProviders.WalletConnect,
+                SupportedProviders.WalletConnect
               ],
               searchable: false
             }
