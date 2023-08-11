@@ -6,7 +6,10 @@ const useDeviceType = () => {
   useEffect(() => {
     const userAgent = window.navigator.userAgent.toLowerCase()
 
-    console.debug(userAgent)
+    console.debug(
+      userAgent,
+      /mobile|android|iphone|ipad|iemobile/i.test(userAgent)
+    )
 
     const checkIsDesktop = () => {
       return !/mobile|android|iphone|ipad|iemobile/i.test(userAgent)
